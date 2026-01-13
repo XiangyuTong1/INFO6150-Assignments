@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!-- Header Section -->
 <header>
     <nav>
         <h1>🧘 Digital Wellness Hub</h1>
@@ -22,7 +21,6 @@
 </header>
 
 <main>
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <h2>Balance Your Digital Life, Embrace The Real World</h2>
         <p>Learn to manage screen time and maintain mental and physical wellness</p>
@@ -34,7 +32,6 @@
         </figure>
     </section>
 
-    <!-- Benefits Section with Articles -->
     <section id="benefits" class="content-section">
         <article>
             <h2>Why Digital Wellness Matters</h2>
@@ -49,14 +46,12 @@
                 <li>Increased social anxiety</li>
             </ul>
 
-            <!-- Video Element - Using your local file -->
             <h3>Watch: Digital Wellness Introduction</h3>
             <video controls width="100%">
                 <source src="media/digital-wellness.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
 
-            <!-- Audio Element - Using your local file -->
             <h3>Listen: Relaxation Meditation</h3>
             <audio controls>
                 <source src="media/meditation.mp3" type="audio/mpeg">
@@ -64,7 +59,6 @@
             </audio>
         </article>
 
-        <!-- Table -->
         <article>
             <h2>Daily Screen Time Recommendations</h2>
             <table>
@@ -105,30 +99,93 @@
             </table>
         </article>
 
-        <!-- Details and Summary -->
         <article>
             <h2>Practical Wellness Tips</h2>
 
             <details>
                 <summary>💡 The 20-20-20 Rule</summary>
-                <p>Every 20 minutes of screen use, look at something 20 feet away for 20 seconds. This reduces eye strain effectively.</p>
+                <p>Every 20 minutes of screen use, look at something 20 feet away for 20 seconds.</p>
             </details>
 
             <details>
                 <summary>🌙 Pre-Sleep Digital Detox</summary>
-                <p>Stop using devices at least 1 hour before bedtime. Blue light suppresses melatonin and affects sleep quality.</p>
+                <p>Stop using devices at least 1 hour before bedtime.</p>
             </details>
 
             <details>
                 <summary>📱 Set App Time Limits</summary>
-                <p>Use your phone's screen time management to set daily usage limits for social media apps.</p>
+                <p>Use screen time management to set daily usage limits.</p>
             </details>
 
             <details>
                 <summary>🏃 Regular Movement Breaks</summary>
-                <p>Stand up and move for 5-10 minutes every hour. Do simple stretching exercises.</p>
+                <p>Stand up and move for 5-10 minutes every hour.</p>
             </details>
         </article>
+    </section>
+
+    <!-- Aside Section -->
+    <aside id="resources">
+        <h2>Recommended Tools & Apps</h2>
+
+        <div class="tool-card">
+            <h3>Forest - Stay Focused</h3>
+            <p>Plant virtual trees to stay focused and avoid phone distractions.</p>
+            <a href="https://www.forestapp.cc/" target="_blank">Learn More →</a>
+        </div>
+
+        <div class="tool-card">
+            <h3>Headspace - Meditation</h3>
+            <p>Guided meditation and mindfulness exercises.</p>
+            <a href="https://www.headspace.com/" target="_blank">Learn More →</a>
+        </div>
+
+        <figure>
+            <img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=400" alt="Apps" width="400" height="300">
+            <figcaption>Tools to manage your digital life</figcaption>
+        </figure>
+    </aside>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="contact-section">
+        <h2>Subscribe to Our Wellness Newsletter</h2>
+        <p>Get the latest digital wellness tips and resources</p>
+
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Create Password:</label>
+                <input type="password" id="password" name="password" required placeholder="At least 8 characters">
+            </div>
+
+            <div class="form-group">
+                <label for="interest">Areas of Interest:</label>
+                <input list="topics" id="interest" name="interest" placeholder="Select a topic">
+                <datalist id="topics">
+                    <option value="Sleep Health">
+                    <option value="Eye Care">
+                    <option value="Exercise & Fitness">
+                    <option value="Mental Health">
+                    <option value="Work Productivity">
+                </datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number (Optional):</label>
+                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+            </div>
+
+            <button type="submit">Subscribe Now</button>
+        </form>
     </section>
 </main>
 
