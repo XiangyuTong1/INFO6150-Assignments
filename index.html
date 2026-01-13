@@ -3,11 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Wellness Hub - Balance Your Digital Life</title>
+    <title>Digital Wellness Hub</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<!-- Header Section -->
+<header>
+    <nav>
+        <h1>🧘 Digital Wellness Hub</h1>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#benefits">Benefits</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h2>Balance Your Digital Life, Embrace The Real World</h2>
+        <p>Learn to manage screen time and maintain mental and physical wellness</p>
+        <button onclick="scrollToSection('benefits')">Start Your Journey</button>
+
+        <figure>
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800" alt="Person meditating" width="800" height="400">
+            <figcaption>Finding balance between digital and real life</figcaption>
+        </figure>
+    </section>
+
+    <!-- Benefits Section with Articles -->
+    <section id="benefits" class="content-section">
+        <article>
+            <h2>Why Digital Wellness Matters</h2>
+            <p>With smartphones, social media, and remote work, we spend more time in front of screens than ever before. Excessive device usage can lead to eye strain, sleep problems, anxiety, and decreased attention span.</p>
+
+            <h3>Common Symptoms of Digital Overload</h3>
+            <ul>
+                <li>Eye fatigue and dryness</li>
+                <li>Neck and shoulder pain</li>
+                <li>Decreased sleep quality</li>
+                <li>Difficulty concentrating</li>
+                <li>Increased social anxiety</li>
+            </ul>
+
+            <!-- Video Element - Using your local file -->
+            <h3>Watch: Digital Wellness Introduction</h3>
+            <video controls width="100%">
+                <source src="media/digital-wellness.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <!-- Audio Element - Using your local file -->
+            <h3>Listen: Relaxation Meditation</h3>
+            <audio controls>
+                <source src="media/meditation.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </article>
+
+        <!-- Table -->
+        <article>
+            <h2>Daily Screen Time Recommendations</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Age Group</th>
+                    <th>Screen Time</th>
+                    <th>Break Frequency</th>
+                    <th>Outdoor Activity</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Children (2-5 years)</td>
+                    <td>Max 1 hour</td>
+                    <td>Every 30 minutes</td>
+                    <td>3 hours/day</td>
+                </tr>
+                <tr>
+                    <td>Youth (6-17 years)</td>
+                    <td>Max 2 hours</td>
+                    <td>Every 45 minutes</td>
+                    <td>2 hours/day</td>
+                </tr>
+                <tr>
+                    <td>Adults (18-64 years)</td>
+                    <td>Max 4 hours</td>
+                    <td>Every 60 minutes</td>
+                    <td>1 hour/day</td>
+                </tr>
+                <tr>
+                    <td>Seniors (65+ years)</td>
+                    <td>Max 3 hours</td>
+                    <td>Every 45 minutes</td>
+                    <td>1.5 hours/day</td>
+                </tr>
+                </tbody>
+            </table>
+        </article>
+
+        <!-- Details and Summary -->
+        <article>
+            <h2>Practical Wellness Tips</h2>
+
+            <details>
+                <summary>💡 The 20-20-20 Rule</summary>
+                <p>Every 20 minutes of screen use, look at something 20 feet away for 20 seconds. This reduces eye strain effectively.</p>
+            </details>
+
+            <details>
+                <summary>🌙 Pre-Sleep Digital Detox</summary>
+                <p>Stop using devices at least 1 hour before bedtime. Blue light suppresses melatonin and affects sleep quality.</p>
+            </details>
+
+            <details>
+                <summary>📱 Set App Time Limits</summary>
+                <p>Use your phone's screen time management to set daily usage limits for social media apps.</p>
+            </details>
+
+            <details>
+                <summary>🏃 Regular Movement Breaks</summary>
+                <p>Stand up and move for 5-10 minutes every hour. Do simple stretching exercises.</p>
+            </details>
+        </article>
+    </section>
+</main>
+
+<script>
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 </body>
 </html>
