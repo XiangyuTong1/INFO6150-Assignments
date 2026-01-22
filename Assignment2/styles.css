@@ -178,6 +178,77 @@ article.education-card .date {
 }
 
 /* ============================================
+   SKILLS TABLE
+   ============================================ */
+.skills-table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+}
+
+/* CSS Selector 1: Type selector */
+th {
+    background: #667eea;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+}
+
+/* CSS Selector 2: Pseudo-class selector */
+tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+/* CSS Selector 3: Child selector */
+tbody > tr {
+    border-bottom: 1px solid #ddd;
+}
+
+/* CSS Selector 4: Descendant selector */
+table td {
+    padding: 1rem;
+}
+
+/* CSS Selector 5: Hover pseudo-class */
+tr:hover {
+    background: #e9ecef;
+}
+
+/* ============================================
+   EXPERIENCE SECTION
+   ============================================ */
+article.experience-item {
+    background: #f8f9fa;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    border-left: 4px solid #764ba2;
+}
+
+article.experience-item h3 {
+    color: #764ba2;
+    margin-bottom: 0.5rem;
+}
+
+article.experience-item .date {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+article.experience-item ul {
+    margin-left: 2rem;
+}
+
+article.experience-item li {
+    margin: 0.5rem 0;
+}
+
+/* ============================================
    FOOTER
    ============================================ */
 footer {
