@@ -69,6 +69,115 @@ nav a:hover {
 }
 
 /* ============================================
+   SECTIONS
+   ============================================ */
+section {
+    padding: 4rem 0;
+    background: white;
+    margin: 2rem 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+section h2 {
+    color: #667eea;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 6rem 2rem;
+    margin: 0;
+    border-radius: 0;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.hero button {
+    background: white;
+    color: #667eea;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.hero button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+.about-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.about-content p {
+    max-width: 800px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* ============================================
+   EDUCATION SECTION
+   ============================================ */
+.education-grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+article.education-card {
+    flex: 1;
+    min-width: 300px;
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+article.education-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+article.education-card h3 {
+    color: #667eea;
+    margin-bottom: 0.5rem;
+}
+
+article.education-card .date {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+/* ============================================
    FOOTER
    ============================================ */
 footer {
