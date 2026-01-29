@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d8eddf9-8019-4cfe-9bea-504426a834df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assignment2/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignment2/styles.css" afterDir="false" />
+    <list default="true" id="7d8eddf9-8019-4cfe-9bea-504426a834df" name="Changes" comment="Add Contact Form and Media Queries">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +22,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "XiangyuTong1"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/XiangyuTong1/INFO6150-Assignments.git",
+    "accountId": "deac570e-e94b-4cea-b525-67afa0b9223a"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -69,6 +79,64 @@
       <option name="presentableId" value="Default" />
       <updated>1768331353639</updated>
     </task>
+    <task id="LOCAL-00001" summary="Basic Structure + Header + Navigation">
+      <option name="closed" value="true" />
+      <created>1769039792721</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1769039792721</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add Hero, About, and Education Sections">
+      <option name="closed" value="true" />
+      <created>1769040598694</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1769040598694</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add Skills Table and Experience Section">
+      <option name="closed" value="true" />
+      <created>1769040729881</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1769040729881</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add Image Gallery">
+      <option name="closed" value="true" />
+      <created>1769041226401</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1769041226401</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add Testimonials and Aside Section">
+      <option name="closed" value="true" />
+      <created>1769041634836</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1769041634836</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add Contact Form and Media Queries">
+      <option name="closed" value="true" />
+      <created>1769041907721</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1769041907721</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Basic Structure + Header + Navigation" />
+    <MESSAGE value="Add Hero, About, and Education Sections" />
+    <MESSAGE value="Add Skills Table and Experience Section" />
+    <MESSAGE value="Add Image Gallery" />
+    <MESSAGE value="Add Testimonials and Aside Section" />
+    <MESSAGE value="Add Contact Form and Media Queries" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Contact Form and Media Queries" />
   </component>
 </project>
