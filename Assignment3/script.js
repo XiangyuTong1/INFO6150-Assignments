@@ -26,63 +26,32 @@ document.addEventListener('DOMContentLoaded', function() {
     var submitBtn = document.getElementById('button');
     submitBtn.disabled = true;
     
-    attachEventListeners();
-});
+    var socialMediaDiv = document.querySelector('.socialmediaicons');
+    var ul = document.createElement('ul');
+    var socialIcons = {
+        facebook: 'images/facebook.png',
+        twitter: 'images/twitter.png',
+        flickr: 'images/flickr.png',
+        youtube: 'images/youtube.png',
+        google: 'images/google.png',
+        linkedin: 'images/linkedin.png',
+        wordpress: 'images/wordpress.png',
+        meetup: 'images/meetup.png'
+    };
 
-function attachEventListeners() {
-    var checkboxes = document.querySelectorAll('#myTable tbody tr:not(.dropDownTextArea) input[type="checkbox"]');
-    checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', handleCheckboxChange);
-    });
-    
-    var arrows = document.querySelectorAll('.arrow');
-    arrows.forEach(function(arrow) {
-        arrow.addEventListener('click', toggleDropdown);
-    });
-}
-
-function toggleDropdown(e) {
-    var arrow = e.target;
-    var currentRow = arrow.closest('tr');
-    var dropdownRow = currentRow.nextElementSibling;
-    
-    if(dropdownRow && dropdownRow.classList.contains('dropDownTextArea')) {
-        if(dropdownRow.style.display === 'none' || dropdownRow.style.display === '') {
-            dropdownRow.style.display = 'table-row';
-        } else {
-            dropdownRow.style.display = 'none';
-        }
+    for(var key in socialIcons) {
+        var li = document.createElement('li');
+        var img = document.createElement('img');
+        img.src = socialIcons[key];
+        img.alt = key;
+        li.appendChild(img);
+        ul.appendChild(li);
     }
-}
-function Title(t1) {
-    this.mytitle = t1;
-}
-
-Title.prototype.getName = function () {
-    return (this.mytitle);
-}
-
-var socialMedia = {
-    facebook: 'http://facebook.com',
-    twitter: 'http://twitter.com',
-    flickr: 'http://flickr.com',
-    youtube: 'http://youtube.com'
-};
-
-var t = new Title("CONNECT WITH ME!");
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('studentInfo').innerHTML = 'Your Full Name - NUID: 123456789';
-
-    var dropdowns = document.querySelectorAll('.dropDownTextArea');
-    dropdowns.forEach(function(dropdown) {
-        dropdown.style.display = 'none';
-    });
-
-    var submitBtn = document.getElementById('button');
-    submitBtn.disabled = true;
+    socialMediaDiv.appendChild(ul);
 
     attachEventListeners();
+
+    document.getElementById('add').addEventListener('click', addNewStudent);
 });
 
 function attachEventListeners() {
@@ -150,6 +119,86 @@ function updateSubmitButton() {
     } else {
         submitBtn.disabled = true;
         submitBtn.classList.remove('enabled');
+    }
+}
+
+function addNewStudent() {
+    var tbody = document.querySelector('#myTable tbody');
+    var rows = tbody.querySelectorAll('tr:not(.dropDownTextArea)');
+
+    var studentNumbers = [];
+    rows.forEach(function(row) {
+        var studentText = row.cells[1].textContent;
+        var num = parseInt(studentText.replace('Student ', ''));
+        studentNumbers.push(num);
+    });
+
+    var nextNum = 1;
+    while(studentNumbers.includes(nextNum)) {
+        nextNum++;
+    }
+
+    var newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td><input type="checkbox" /><br /><br /><img src="down.png" width="25px" class="arrow" /></td>
+        <td>Student ${nextNum}</td>
+        <td>Teacher ${nextNum}</td>
+        <td>Approved</td>
+        <td>Fall</td>
+        <td>TA</td>
+        <td>${12345 + (nextNum - 1) * 11111}</td>
+        <td>100%</td>
+        <td></td>
+        <td></td>
+    `;
+
+    var dropdownRow = document.createElement('tr');
+    dropdownRow.className = 'dropDownTextArea';
+    dropdownRow.innerHTML = `
+        <td colspan="10">
+            Advisor:<br /><br />
+            Award Details<br />
+            Summer 1-2014(TA)<br />
+            Budget Number: <br />
+            Tuition Number: <br />
+            Comments:<br /><br /><br />
+            Award Status:<br /><br /><br />
+        </td>
+    `;
+
+    tbody.appendChild(newRow);
+    tbody.appendChild(dropdownRow);
+
+    attachEventListeners();
+
+    alert('Student ' + nextNum + ' Record added successfully');
+}
+
+function deleteStudent(row) {
+    var studentName = row.cells[1].textContent;
+    var dropdownRow = row.nextElementSibling;
+
+    row.remove();
+    if(dropdownRow && dropdownRow.classList.contains('dropDownTextArea')) {
+        dropdownRow.remove();
+    }
+
+    updateSubmitButton();
+
+    alert(studentName + ' Record deleted successfully');
+}
+
+function editStudent(studentName) {
+    var userInput = prompt('Edit details of ' + studentName + '\n\nEnter new student name:', studentName);
+
+    if(userInput !== null && userInput.trim() !== '') {
+        var rows = document.querySelectorAll('#myTable tbody tr:not(.dropDownTextArea)');
+        rows.forEach(function(row) {
+            if(row.cells[1].textContent === studentName) {
+                row.cells[1].textContent = userInput;
+            }
+        });
+        alert(userInput + ' data updated successfully');
     }
 }
 
