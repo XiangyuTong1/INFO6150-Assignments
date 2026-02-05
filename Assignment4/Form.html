@@ -64,6 +64,12 @@
             cursor: not-allowed;
         }
 
+        .char-counter {
+            margin-left: 150px;
+            font-size: 12px;
+            color: #666;
+        }
+
         #resultsTable {
             width: 100%;
             border-collapse: collapse;
@@ -142,6 +148,7 @@
             <div class="form-group">
                 <label for="address2">Street Address 2:</label>
                 <input type="text" name="address2" id="address2" placeholder="Apt, Suite, Unit" maxlength="100"/>
+                <div class="char-counter" id="address2Counter">0/100 characters used</div>
             </div>
 
             <div class="form-group">
@@ -239,9 +246,10 @@
             validateEmail(e.target);
         });
 
-        // Phone number validation
+        // Phone number validation with masking
         const phoneNumber = document.getElementById('phoneNumber');
         phoneNumber.addEventListener('input', function(e) {
+            maskPhoneNumber(e.target);
             validatePhone(e.target);
         });
 
@@ -250,6 +258,12 @@
         zipcode.addEventListener('input', function(e) {
             e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
             validateZipcode(e.target);
+        });
+
+        // Address 2 character counter
+        const address2 = document.getElementById('address2');
+        address2.addEventListener('input', function(e) {
+            updateCharCounter(e.target);
         });
 
         // Drink select validation with dynamic checkbox
@@ -285,6 +299,7 @@
             setTimeout(() => {
                 resetValidation();
                 document.getElementById('drinkCheckboxContainer').innerHTML = '';
+                document.getElementById('address2Counter').textContent = '0/100 characters used';
             }, 0);
         });
     }
@@ -351,6 +366,22 @@
         updateSubmitButton();
     }
 
+    function maskPhoneNumber(element) {
+        let value = element.value.replace(/\D/g, '');
+
+        if (value.length > 0) {
+            if (value.length <= 3) {
+                value = '(' + value;
+            } else if (value.length <= 6) {
+                value = '(' + value.slice(0, 3) + ') ' + value.slice(3);
+            } else {
+                value = '(' + value.slice(0, 3) + ') ' + value.slice(3, 6) + '-' + value.slice(6, 10);
+            }
+        }
+
+        element.value = value;
+    }
+
     function validatePhone(element) {
         const value = element.value;
         const errorElement = document.getElementById('phoneNumberError');
@@ -389,6 +420,13 @@
         errorElement.textContent = errorMessage;
         errorElement.style.display = errorMessage ? 'block' : 'none';
         updateSubmitButton();
+    }
+
+    function updateCharCounter(element) {
+        const counter = document.getElementById('address2Counter');
+        const length = element.value.length;
+        const maxLength = element.getAttribute('maxlength');
+        counter.textContent = `${length}/${maxLength} characters used`;
     }
 
     function validateDrinkSelect(element) {
@@ -537,6 +575,7 @@
         // Clear form
         form.reset();
         document.getElementById('drinkCheckboxContainer').innerHTML = '';
+        document.getElementById('address2Counter').textContent = '0/100 characters used';
         resetValidation();
     }
 
