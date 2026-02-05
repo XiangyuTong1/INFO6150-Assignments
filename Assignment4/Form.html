@@ -63,6 +63,33 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
+
+        #resultsTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        #resultsTable th, #resultsTable td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #resultsTable th {
+            background-color: #333;
+            color: white;
+        }
+
+        .dynamic-checkbox-container {
+            margin-left: 150px;
+            margin-top: 10px;
+        }
+
+        .dynamic-textfield {
+            margin-left: 150px;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -128,6 +155,7 @@
                     <option value="Fresh Orange Juice">Fresh Orange Juice</option>
                 </select>
                 <div class="error-message" id="drinkSelectError">Please select a drink</div>
+                <div id="drinkCheckboxContainer" class="dynamic-checkbox-container"></div>
             </div>
 
             <div class="form-group">
@@ -167,6 +195,9 @@
         source: false,
         comments: false
     };
+
+    // Store submitted data
+    let submittedData = [];
 
     // Regex patterns
     const patterns = {
@@ -221,10 +252,11 @@
             validateZipcode(e.target);
         });
 
-        // Drink select validation
+        // Drink select validation with dynamic checkbox
         const drinkSelect = document.getElementById('drinkSelect');
         drinkSelect.addEventListener('change', function(e) {
             validateDrinkSelect(e.target);
+            handleDrinkSelection(e.target);
         });
 
         // Source checkboxes validation
@@ -241,11 +273,18 @@
             validateComments(e.target);
         });
 
-        // Form reset
+        // Form submission
         const form = document.getElementById('feedbackForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleSubmit();
+        });
+
+        // Form reset
         form.addEventListener('reset', function() {
             setTimeout(() => {
                 resetValidation();
+                document.getElementById('drinkCheckboxContainer').innerHTML = '';
             }, 0);
         });
     }
@@ -367,6 +406,55 @@
         updateSubmitButton();
     }
 
+    function handleDrinkSelection(selectElement) {
+        const container = document.getElementById('drinkCheckboxContainer');
+        const selectedValue = selectElement.value;
+
+        if (selectedValue) {
+            container.innerHTML = `
+                <label>
+                    <input type="checkbox" id="largeDrinkCheckbox" />
+                    Large drink (75¢ extra)
+                </label>
+                <div id="largeDrinkTextField" class="dynamic-textfield"></div>
+            `;
+
+            const checkbox = document.getElementById('largeDrinkCheckbox');
+            checkbox.addEventListener('change', function() {
+                handleLargeDrinkCheckbox(this);
+            });
+        } else {
+            container.innerHTML = '';
+        }
+    }
+
+    function handleLargeDrinkCheckbox(checkbox) {
+        const textFieldContainer = document.getElementById('largeDrinkTextField');
+
+        if (checkbox.checked) {
+            textFieldContainer.innerHTML = `
+                <input type="text" id="largeDrinkText" placeholder="Special instructions for large drink" required style="width: 300px; padding: 5px;" />
+                <div class="error-message" id="largeDrinkTextError" style="display: block;">This field is required when checkbox is selected</div>
+            `;
+
+            const textField = document.getElementById('largeDrinkText');
+            textField.addEventListener('input', function() {
+                const errorElement = document.getElementById('largeDrinkTextError');
+                if (textField.value.trim() === '') {
+                    errorElement.style.display = 'block';
+                } else {
+                    errorElement.style.display = 'none';
+                }
+                updateSubmitButton();
+            });
+
+            updateSubmitButton();
+        } else {
+            textFieldContainer.innerHTML = '';
+            updateSubmitButton();
+        }
+    }
+
     function validateSource() {
         const sourceCheckboxes = document.querySelectorAll('input[name="source"]');
         const isValid = Array.from(sourceCheckboxes).some(checkbox => checkbox.checked);
@@ -409,7 +497,99 @@
     function updateSubmitButton() {
         const submitBtn = document.getElementById('submitBtn');
         const allValid = Object.values(validationState).every(value => value === true);
+
+        // Check if large drink checkbox is selected
+        const largeDrinkCheckbox = document.getElementById('largeDrinkCheckbox');
+        const largeDrinkText = document.getElementById('largeDrinkText');
+
+        if (largeDrinkCheckbox && largeDrinkCheckbox.checked) {
+            if (!largeDrinkText || largeDrinkText.value.trim() === '') {
+                submitBtn.disabled = true;
+                return;
+            }
+        }
+
         submitBtn.disabled = !allValid;
+    }
+
+    function handleSubmit() {
+        const form = document.getElementById('feedbackForm');
+        const formData = new FormData(form);
+
+        const data = {
+            title: formData.get('title'),
+            firstName: formData.get('firstName'),
+            lastName: formData.get('lastName'),
+            emailId: formData.get('emailId'),
+            phoneNumber: formData.get('phoneNumber'),
+            zipcode: formData.get('zipcode'),
+            address2: formData.get('address2') || '',
+            drinkSelect: formData.get('drinkSelect'),
+            largeDrink: document.getElementById('largeDrinkCheckbox')?.checked ? 'Yes' : 'No',
+            largeDrinkInstructions: document.getElementById('largeDrinkText')?.value || '',
+            source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => cb.value).join(', '),
+            comments: formData.get('comments')
+        };
+
+        submittedData.push(data);
+        displayResults();
+
+        // Clear form
+        form.reset();
+        document.getElementById('drinkCheckboxContainer').innerHTML = '';
+        resetValidation();
+    }
+
+    function displayResults() {
+        const container = document.getElementById('resultsContainer');
+
+        let tableHTML = `
+            <h3>Submitted Data</h3>
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Zipcode</th>
+                        <th>Address 2</th>
+                        <th>Drink</th>
+                        <th>Large Drink</th>
+                        <th>Instructions</th>
+                        <th>Source</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        submittedData.forEach(data => {
+            tableHTML += `
+                <tr>
+                    <td>${data.title}</td>
+                    <td>${data.firstName}</td>
+                    <td>${data.lastName}</td>
+                    <td>${data.emailId}</td>
+                    <td>${data.phoneNumber}</td>
+                    <td>${data.zipcode}</td>
+                    <td>${data.address2}</td>
+                    <td>${data.drinkSelect}</td>
+                    <td>${data.largeDrink}</td>
+                    <td>${data.largeDrinkInstructions}</td>
+                    <td>${data.source}</td>
+                    <td>${data.comments}</td>
+                </tr>
+            `;
+        });
+
+        tableHTML += `
+                </tbody>
+            </table>
+        `;
+
+        container.innerHTML = tableHTML;
     }
 
     function resetValidation() {
