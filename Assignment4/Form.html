@@ -96,9 +96,139 @@
             margin-left: 150px;
             margin-top: 5px;
         }
+
+        /* AI Assistant Styles */
+        #aiAssistantBtn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        #aiAssistantBtn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+        }
+
+        #chatWindow {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            flex-direction: column;
+            z-index: 1001;
+        }
+
+        #chatHeader {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        #chatMessages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f5f5f5;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .bot-message {
+            background: #e3f2fd;
+            margin-right: auto;
+        }
+
+        .user-message {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+
+        #chatInputContainer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        #chatInput {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 5px;
+        }
+
+        #chatSendBtn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        #chatSendBtn:hover {
+            background: #5568d3;
+        }
+
+        #closeChatBtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+        }
     </style>
 </head>
 <body>
+<!-- AI Assistant Button -->
+<button id="aiAssistantBtn">🤖 AI Assistant</button>
+
+<!-- Chat Window -->
+<div id="chatWindow">
+    <div id="chatHeader">
+        <span>Form Assistant</span>
+        <button id="closeChatBtn">×</button>
+    </div>
+    <div id="chatMessages">
+        <div class="message bot-message">
+            Hi! I'm here to help with questions about filling out this form. Try asking me about email requirements, phone format, or any other form-related questions!
+        </div>
+    </div>
+    <div id="chatInputContainer">
+        <input type="text" id="chatInput" placeholder="Type your question...">
+        <button id="chatSendBtn">Send</button>
+    </div>
+</div>
+
 <div id="container">
     <main>
         <h2>Feedback</h2>
@@ -217,6 +347,7 @@
     // Initialize form
     document.addEventListener('DOMContentLoaded', function() {
         setupValidation();
+        setupChatbot();
     });
 
     function setupValidation() {
@@ -641,6 +772,106 @@
         });
 
         updateSubmitButton();
+    }
+
+    // Chatbot functionality
+    function setupChatbot() {
+        const aiBtn = document.getElementById('aiAssistantBtn');
+        const chatWindow = document.getElementById('chatWindow');
+        const closeBtn = document.getElementById('closeChatBtn');
+        const sendBtn = document.getElementById('chatSendBtn');
+        const chatInput = document.getElementById('chatInput');
+
+        aiBtn.addEventListener('click', function() {
+            chatWindow.style.display = 'flex';
+        });
+
+        closeBtn.addEventListener('click', function() {
+            chatWindow.style.display = 'none';
+        });
+
+        sendBtn.addEventListener('click', function() {
+            sendMessage();
+        });
+
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const messagesContainer = document.getElementById('chatMessages');
+        const message = input.value.trim();
+
+        if (message === '') return;
+
+        // Display user message
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.className = 'message user-message';
+        userMessageDiv.textContent = message;
+        messagesContainer.appendChild(userMessageDiv);
+
+        // Get bot response
+        const botResponse = getBotResponse(message);
+
+        // Display bot message
+        setTimeout(() => {
+            const botMessageDiv = document.createElement('div');
+            botMessageDiv.className = 'message bot-message';
+            botMessageDiv.textContent = botResponse;
+            messagesContainer.appendChild(botMessageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 500);
+
+        input.value = '';
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function getBotResponse(message) {
+        const lowerMessage = message.toLowerCase();
+
+        // FAQ responses
+        if (lowerMessage.includes('email')) {
+            return 'You must use your Northeastern email address ending with @northeastern.edu (example: student@northeastern.edu).';
+        }
+
+        if (lowerMessage.includes('phone') || lowerMessage.includes('number')) {
+            return 'The phone number must be in the format (XXX) XXX-XXXX. The system will automatically format it as you type.';
+        }
+
+        if (lowerMessage.includes('zip') || lowerMessage.includes('zipcode') || lowerMessage.includes('postal')) {
+            return 'The zip code must be exactly 5 digits.';
+        }
+
+        if (lowerMessage.includes('required') || lowerMessage.includes('mandatory') || lowerMessage.includes('field')) {
+            return 'All fields are required except Street Address 2, which is optional. Required fields are marked with an asterisk (*).';
+        }
+
+        if (lowerMessage.includes('address') || lowerMessage.includes('street')) {
+            return 'Street Address 2 is the only optional field. If left blank, it will remain empty in the results table.';
+        }
+
+        if (lowerMessage.includes('submit') || lowerMessage.includes('button') || lowerMessage.includes('disabled')) {
+            return 'The submit button will be disabled until all required fields are correctly filled out. Make sure to validate each field as you type.';
+        }
+
+        if (lowerMessage.includes('drink')) {
+            return 'You must select a drink from the dropdown list. After selecting, you can optionally choose the large size option.';
+        }
+
+        if (lowerMessage.includes('comment')) {
+            return 'Comments must be between 10 and 500 characters long.';
+        }
+
+        if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+            return 'Hello! How can I help you with filling out this form?';
+        }
+
+        // Default response
+        return "Sorry, I don't know that yet. Please check the form instructions or try asking about email, phone format, zip code, required fields, or address requirements.";
     }
 </script>
 </body>
