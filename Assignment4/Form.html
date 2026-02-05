@@ -36,16 +36,32 @@
             overflow: hidden;
         }
 
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-left: 150px;
+            display: none;
+        }
+
         input[type="text"], textarea, select {
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 3px;
         }
 
+        input[type="text"]:invalid, textarea:invalid {
+            border-color: red;
+        }
+
         input[type="submit"], input[type="reset"] {
             padding: 8px 20px;
             margin-right: 10px;
             cursor: pointer;
+        }
+
+        #submitBtn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -63,31 +79,37 @@
                 <input type="radio" name="title" id="miss" value="Miss"/>Miss
                 <input type="radio" name="title" id="mr" value="Mr."/>Mr.
                 <input type="radio" name="title" id="mrs" value="Mrs."/>Mrs.
+                <div class="error-message" id="titleError">Please select a title</div>
             </div>
 
             <div class="form-group">
                 <label for="firstName">First Name*:</label>
                 <input type="text" name="firstName" id="firstName" placeholder="First Name"/>
+                <div class="error-message" id="firstNameError"></div>
             </div>
 
             <div class="form-group">
                 <label for="lastName">Last Name*:</label>
                 <input type="text" name="lastName" id="lastName" placeholder="Last Name"/>
+                <div class="error-message" id="lastNameError"></div>
             </div>
 
             <div class="form-group">
                 <label for="emailId">Email Id*:</label>
                 <input type="text" name="emailId" id="emailId" placeholder="yourname@northeastern.edu"/>
+                <div class="error-message" id="emailIdError"></div>
             </div>
 
             <div class="form-group">
                 <label for="phoneNumber">Phone Number*:</label>
                 <input type="text" name="phoneNumber" id="phoneNumber" placeholder="(XXX) XXX-XXXX" maxlength="14"/>
+                <div class="error-message" id="phoneNumberError"></div>
             </div>
 
             <div class="form-group">
                 <label for="zipcode">ZipCode*:</label>
                 <input type="text" name="zipcode" id="zipcode" placeholder="12345" maxlength="5"/>
+                <div class="error-message" id="zipcodeError"></div>
             </div>
 
             <div class="form-group">
@@ -105,6 +127,7 @@
                     <option value="Smoothie - Berry Blast">Smoothie - Berry Blast</option>
                     <option value="Fresh Orange Juice">Fresh Orange Juice</option>
                 </select>
+                <div class="error-message" id="drinkSelectError">Please select a drink</div>
             </div>
 
             <div class="form-group">
@@ -112,15 +135,17 @@
                 <input type="checkbox" name="source" value="Facebook" id="sourceFacebook"/> Facebook
                 <input type="checkbox" name="source" value="Google" id="sourceGoogle"/> Google
                 <input type="checkbox" name="source" value="Yelp" id="sourceYelp"/> Yelp
+                <div class="error-message" id="sourceError">Please select at least one option</div>
             </div>
 
             <div class="form-group">
                 <label for="comments">Comments*:</label>
                 <textarea name="comments" id="comments" placeholder="Your comments" rows="5" cols="25"></textarea>
+                <div class="error-message" id="commentsError"></div>
             </div>
 
             <div class="form-group">
-                <input type="submit" id="submitBtn" value="Submit">
+                <input type="submit" id="submitBtn" value="Submit" disabled>
                 <input type="reset" value="Reset">
             </div>
         </form>
@@ -130,7 +155,274 @@
 </div>
 
 <script>
-    // JavaScript will be added in next commits
+    // Form validation state
+    const validationState = {
+        title: false,
+        firstName: false,
+        lastName: false,
+        emailId: false,
+        phoneNumber: false,
+        zipcode: false,
+        drinkSelect: false,
+        source: false,
+        comments: false
+    };
+
+    // Regex patterns
+    const patterns = {
+        email: /^[a-zA-Z0-9._%+-]+@northeastern\.edu$/,
+        phone: /^\(\d{3}\) \d{3}-\d{4}$/,
+        zipcode: /^\d{5}$/,
+        alphanumeric: /^[a-zA-Z0-9\s]+$/
+    };
+
+    // Initialize form
+    document.addEventListener('DOMContentLoaded', function() {
+        setupValidation();
+    });
+
+    function setupValidation() {
+        // Title validation
+        const titleRadios = document.querySelectorAll('input[name="title"]');
+        titleRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                validateTitle();
+            });
+        });
+
+        // First Name validation
+        const firstName = document.getElementById('firstName');
+        firstName.addEventListener('input', function(e) {
+            validateAlphanumeric(e.target, 'firstName', 2, 50);
+        });
+
+        // Last Name validation
+        const lastName = document.getElementById('lastName');
+        lastName.addEventListener('input', function(e) {
+            validateAlphanumeric(e.target, 'lastName', 2, 50);
+        });
+
+        // Email validation
+        const emailId = document.getElementById('emailId');
+        emailId.addEventListener('input', function(e) {
+            validateEmail(e.target);
+        });
+
+        // Phone number validation
+        const phoneNumber = document.getElementById('phoneNumber');
+        phoneNumber.addEventListener('input', function(e) {
+            validatePhone(e.target);
+        });
+
+        // Zipcode validation
+        const zipcode = document.getElementById('zipcode');
+        zipcode.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+            validateZipcode(e.target);
+        });
+
+        // Drink select validation
+        const drinkSelect = document.getElementById('drinkSelect');
+        drinkSelect.addEventListener('change', function(e) {
+            validateDrinkSelect(e.target);
+        });
+
+        // Source checkboxes validation
+        const sourceCheckboxes = document.querySelectorAll('input[name="source"]');
+        sourceCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                validateSource();
+            });
+        });
+
+        // Comments validation
+        const comments = document.getElementById('comments');
+        comments.addEventListener('input', function(e) {
+            validateComments(e.target);
+        });
+
+        // Form reset
+        const form = document.getElementById('feedbackForm');
+        form.addEventListener('reset', function() {
+            setTimeout(() => {
+                resetValidation();
+            }, 0);
+        });
+    }
+
+    function validateTitle() {
+        const titleRadios = document.querySelectorAll('input[name="title"]');
+        const isValid = Array.from(titleRadios).some(radio => radio.checked);
+        const errorElement = document.getElementById('titleError');
+
+        if (!isValid) {
+            errorElement.style.display = 'block';
+            validationState.title = false;
+        } else {
+            errorElement.style.display = 'none';
+            validationState.title = true;
+        }
+
+        updateSubmitButton();
+    }
+
+    function validateAlphanumeric(element, fieldName, minLength, maxLength) {
+        const value = element.value.trim();
+        const errorElement = document.getElementById(fieldName + 'Error');
+        let errorMessage = '';
+
+        if (value === '') {
+            errorMessage = 'This field is required';
+            validationState[fieldName] = false;
+        } else if (value.length < minLength) {
+            errorMessage = `Minimum ${minLength} characters required`;
+            validationState[fieldName] = false;
+        } else if (value.length > maxLength) {
+            errorMessage = `Maximum ${maxLength} characters allowed`;
+            validationState[fieldName] = false;
+        } else if (!patterns.alphanumeric.test(value)) {
+            errorMessage = 'Only letters, numbers and spaces allowed';
+            validationState[fieldName] = false;
+        } else {
+            validationState[fieldName] = true;
+        }
+
+        errorElement.textContent = errorMessage;
+        errorElement.style.display = errorMessage ? 'block' : 'none';
+        updateSubmitButton();
+    }
+
+    function validateEmail(element) {
+        const value = element.value.trim();
+        const errorElement = document.getElementById('emailIdError');
+        let errorMessage = '';
+
+        if (value === '') {
+            errorMessage = 'Email is required';
+            validationState.emailId = false;
+        } else if (!patterns.email.test(value)) {
+            errorMessage = 'Email must be @northeastern.edu';
+            validationState.emailId = false;
+        } else {
+            validationState.emailId = true;
+        }
+
+        errorElement.textContent = errorMessage;
+        errorElement.style.display = errorMessage ? 'block' : 'none';
+        updateSubmitButton();
+    }
+
+    function validatePhone(element) {
+        const value = element.value;
+        const errorElement = document.getElementById('phoneNumberError');
+        let errorMessage = '';
+
+        if (value === '') {
+            errorMessage = 'Phone number is required';
+            validationState.phoneNumber = false;
+        } else if (!patterns.phone.test(value)) {
+            errorMessage = 'Format: (XXX) XXX-XXXX';
+            validationState.phoneNumber = false;
+        } else {
+            validationState.phoneNumber = true;
+        }
+
+        errorElement.textContent = errorMessage;
+        errorElement.style.display = errorMessage ? 'block' : 'none';
+        updateSubmitButton();
+    }
+
+    function validateZipcode(element) {
+        const value = element.value;
+        const errorElement = document.getElementById('zipcodeError');
+        let errorMessage = '';
+
+        if (value === '') {
+            errorMessage = 'Zipcode is required';
+            validationState.zipcode = false;
+        } else if (!patterns.zipcode.test(value)) {
+            errorMessage = 'Zipcode must be 5 digits';
+            validationState.zipcode = false;
+        } else {
+            validationState.zipcode = true;
+        }
+
+        errorElement.textContent = errorMessage;
+        errorElement.style.display = errorMessage ? 'block' : 'none';
+        updateSubmitButton();
+    }
+
+    function validateDrinkSelect(element) {
+        const value = element.value;
+        const errorElement = document.getElementById('drinkSelectError');
+
+        if (value === '') {
+            errorElement.style.display = 'block';
+            validationState.drinkSelect = false;
+        } else {
+            errorElement.style.display = 'none';
+            validationState.drinkSelect = true;
+        }
+
+        updateSubmitButton();
+    }
+
+    function validateSource() {
+        const sourceCheckboxes = document.querySelectorAll('input[name="source"]');
+        const isValid = Array.from(sourceCheckboxes).some(checkbox => checkbox.checked);
+        const errorElement = document.getElementById('sourceError');
+
+        if (!isValid) {
+            errorElement.style.display = 'block';
+            validationState.source = false;
+        } else {
+            errorElement.style.display = 'none';
+            validationState.source = true;
+        }
+
+        updateSubmitButton();
+    }
+
+    function validateComments(element) {
+        const value = element.value.trim();
+        const errorElement = document.getElementById('commentsError');
+        let errorMessage = '';
+
+        if (value === '') {
+            errorMessage = 'Comments are required';
+            validationState.comments = false;
+        } else if (value.length < 10) {
+            errorMessage = 'Minimum 10 characters required';
+            validationState.comments = false;
+        } else if (value.length > 500) {
+            errorMessage = 'Maximum 500 characters allowed';
+            validationState.comments = false;
+        } else {
+            validationState.comments = true;
+        }
+
+        errorElement.textContent = errorMessage;
+        errorElement.style.display = errorMessage ? 'block' : 'none';
+        updateSubmitButton();
+    }
+
+    function updateSubmitButton() {
+        const submitBtn = document.getElementById('submitBtn');
+        const allValid = Object.values(validationState).every(value => value === true);
+        submitBtn.disabled = !allValid;
+    }
+
+    function resetValidation() {
+        Object.keys(validationState).forEach(key => {
+            validationState[key] = false;
+        });
+
+        document.querySelectorAll('.error-message').forEach(error => {
+            error.style.display = 'none';
+        });
+
+        updateSubmitButton();
+    }
 </script>
 </body>
 </html>
