@@ -14,72 +14,157 @@
           color: #fff;
           padding: 30px 16px;
         }
-        h1 { text-align: center; font-size: 28px; margin-bottom: 28px; letter-spacing: 2px; }
-        .container { max-width: 680px; margin: 0 auto; }
-        .card {
+        h1 {
+          text-align: center;
+          font-size: 28px;
+          margin-bottom: 30px;
+          letter-spacing: 2px;
+        }
+        .container { max-width: 700px; margin: 0 auto; }
+        .timer-card {
           background: rgba(255,255,255,0.07);
-          border: 1px solid rgba(255,255,255,0.12);
-          border-radius: 16px;
-          padding: 32px;
-          margin-bottom: 22px;
-          backdrop-filter: blur(10px);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255,255,255,0.15);
+          border-radius: 20px;
+          padding: 40px 32px;
+          margin-bottom: 24px;
+          text-align: center;
         }
         .timer-display {
           font-size: 72px;
+          font-weight: 700;
           font-family: 'Courier New', monospace;
-          text-align: center;
           color: #00d4ff;
           letter-spacing: 6px;
-          margin-bottom: 28px;
+          margin-bottom: 30px;
           text-shadow: 0 0 20px rgba(0,212,255,0.4);
         }
-        .event-details { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 22px; }
-        .form-group label { display: block; font-size: 12px; font-weight: 600; color: #aaa; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .event-details {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+          margin-bottom: 24px;
+          text-align: left;
+        }
+        @media (max-width: 520px) {
+          .event-details { grid-template-columns: 1fr; }
+          .timer-display { font-size: 48px; }
+        }
+        .form-group label {
+          display: block;
+          font-size: 13px;
+          font-weight: 600;
+          color: #aaa;
+          margin-bottom: 6px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
         .form-group input {
           width: 100%;
           padding: 11px 13px;
-          border: 2px solid rgba(255,255,255,0.18);
+          border: 2px solid rgba(255,255,255,0.2);
           border-radius: 8px;
-          background: rgba(255,255,255,0.07);
+          background: rgba(255,255,255,0.08);
           color: #fff;
           font-size: 14px;
           outline: none;
           transition: border-color 0.2s;
         }
-        .form-group input::placeholder { color: #666; }
+        .form-group input::placeholder { color: #777; }
         .form-group input:focus { border-color: #00d4ff; }
+        .form-group input:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+        }
         .form-group input.error-border { border-color: #e74c3c; }
-        .form-group input:disabled { opacity: 0.4; cursor: not-allowed; }
-        .form-group input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+        .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+          filter: invert(1);
+        }
         .error-msg { color: #e74c3c; font-size: 12px; margin-top: 5px; display: none; }
-        .controls { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .btn { padding: 12px 22px; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; transition: transform 0.1s, opacity 0.2s; letter-spacing: 0.5px; }
+        .controls {
+          display: flex;
+          gap: 10px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+        .btn {
+          padding: 12px 22px;
+          border: none;
+          border-radius: 10px;
+          font-size: 14px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: transform 0.1s, opacity 0.2s;
+          letter-spacing: 0.5px;
+        }
         .btn:hover:not(:disabled) { transform: scale(1.04); }
         .btn:disabled { opacity: 0.35; cursor: not-allowed; }
         .btn-start { background: #2ecc71; color: #fff; }
         .btn-pause { background: #f39c12; color: #fff; }
         .btn-stop { background: #e74c3c; color: #fff; }
         .btn-reset { background: #95a5a6; color: #fff; }
-        .history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
-        .history-header h2 { font-size: 18px; }
-        .stats { font-size: 13px; color: #aaa; }
-        .stats strong { color: #00d4ff; }
-        .filter-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+        .history-card {
+          background: rgba(255,255,255,0.07);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255,255,255,0.15);
+          border-radius: 20px;
+          padding: 30px 28px;
+        }
+        .history-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+        .history-header h2 { font-size: 20px; }
+        .stats {
+          display: flex;
+          gap: 16px;
+          font-size: 13px;
+          color: #aaa;
+        }
+        .stats span { color: #00d4ff; font-weight: 600; }
+        .filter-row {
+          display: flex;
+          gap: 10px;
+          margin-bottom: 18px;
+          align-items: center;
+          flex-wrap: wrap;
+        }
         .filter-row input {
           padding: 9px 12px;
-          border: 2px solid rgba(255,255,255,0.18);
+          border: 2px solid rgba(255,255,255,0.2);
           border-radius: 8px;
-          background: rgba(255,255,255,0.07);
+          background: rgba(255,255,255,0.08);
           color: #fff;
           font-size: 13px;
           outline: none;
         }
         .filter-row input::-webkit-calendar-picker-indicator { filter: invert(1); }
-        .btn-filter { padding: 9px 16px; background: #3498db; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
-        .btn-clear { padding: 9px 14px; background: rgba(255,255,255,0.1); color: #ccc; border: none; border-radius: 8px; font-size: 13px; cursor: pointer; }
+        .btn-filter {
+          padding: 9px 16px;
+          background: #3498db;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          font-size: 13px;
+          font-weight: 600;
+          cursor: pointer;
+        }
+        .btn-clear-filter {
+          padding: 9px 14px;
+          background: rgba(255,255,255,0.1);
+          color: #ccc;
+          border: none;
+          border-radius: 8px;
+          font-size: 13px;
+          cursor: pointer;
+        }
         .session-item {
           background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 10px;
           padding: 14px 18px;
           margin-bottom: 10px;
@@ -89,10 +174,15 @@
           flex-wrap: wrap;
           gap: 8px;
         }
-        .session-info strong { display: block; font-size: 14px; }
+        .session-info strong { display: block; font-size: 15px; color: #fff; }
         .session-info small { color: #aaa; font-size: 12px; }
-        .session-duration { font-family: 'Courier New', monospace; font-size: 18px; font-weight: 700; color: #00d4ff; }
-        .empty-msg { text-align: center; color: #555; padding: 28px; font-size: 14px; }
+        .session-duration {
+          font-family: 'Courier New', monospace;
+          font-size: 18px;
+          font-weight: 700;
+          color: #00d4ff;
+        }
+        .empty-msg { text-align: center; color: #666; padding: 30px; font-size: 15px; }
         .notification {
           position: fixed;
           top: 20px;
@@ -107,16 +197,12 @@
           display: none;
           z-index: 9999;
         }
-        @media (max-width: 500px) {
-          .event-details { grid-template-columns: 1fr; }
-          .timer-display { font-size: 48px; letter-spacing: 3px; }
-        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>⏱ Event Stopwatch</h1>
-    <div class="card">
+    <div class="timer-card">
         <div class="timer-display" id="timerDisplay">00:00:00</div>
         <div class="event-details">
             <div class="form-group">
@@ -137,30 +223,49 @@
             <button class="btn btn-reset" id="resetBtn">Reset</button>
         </div>
     </div>
-    <div class="card">
+    <div class="history-card">
         <div class="history-header">
             <h2>Session History</h2>
-            <div class="stats">Sessions: <strong id="totalSessions">0</strong> &nbsp;|&nbsp; Total: <strong id="totalTime">00:00:00</strong></div>
+            <div class="stats">
+                Sessions: <span id="totalSessions">0</span>&nbsp;&nbsp;|&nbsp;&nbsp;Total Time: <span id="totalTime">00:00:00</span>
+            </div>
         </div>
         <div class="filter-row">
-            <input type="date" id="filterDate">
+            <input type="date" id="filterDate" placeholder="Filter by date">
             <button class="btn-filter" id="filterBtn">Filter</button>
-            <button class="btn-clear" id="clearFilterBtn">Clear</button>
+            <button class="btn-clear-filter" id="clearFilterBtn">Clear</button>
         </div>
         <div id="historyList"></div>
     </div>
 </div>
 <div class="notification" id="notification"></div>
 <script>
-    let intervalId = null, totalSeconds = 0, paused = false;
+    let intervalId = null;
+    let totalSeconds = 0;
+    let running = false;
+    let paused = false;
 
-    const pad = n => String(n).padStart(2,'0');
-    const formatTime = s => `${pad(Math.floor(s/3600))}:${pad(Math.floor(s%3600/60))}:${pad(s%60)}`;
+    const today = new Date().toISOString().split('T')[0];
+    $('#eventDate').val(today);
 
-    $('#eventDate').val(new Date().toISOString().split('T')[0]);
+    const pad = n => String(n).padStart(2, '0');
+
+    const formatTime = secs => {
+      const h = Math.floor(secs / 3600);
+      const m = Math.floor((secs % 3600) / 60);
+      const s = secs % 60;
+      return `${pad(h)}:${pad(m)}:${pad(s)}`;
+    };
+
+    const updateDisplay = () => {
+      $('#timerDisplay').text(formatTime(totalSeconds));
+    };
 
     const startTimer = () => new Promise(resolve => {
-      intervalId = setInterval(() => { totalSeconds++; $('#timerDisplay').text(formatTime(totalSeconds)); }, 1000);
+      intervalId = setInterval(() => {
+        totalSeconds++;
+        updateDisplay();
+      }, 1000);
       resolve();
     });
 
@@ -171,76 +276,154 @@
     });
 
     const validateDate = () => {
-      if (!$('#eventDate').val()) { $('#eventDate').addClass('error-border'); $('#date-error').show(); return false; }
-      $('#eventDate').removeClass('error-border'); $('#date-error').hide(); return true;
+      const val = $('#eventDate').val();
+      if (!val) {
+        $('#eventDate').addClass('error-border');
+        $('#date-error').show();
+        return false;
+      }
+      $('#eventDate').removeClass('error-border');
+      $('#date-error').hide();
+      return true;
     };
 
     const validateName = () => {
       const val = $('#eventName').val().trim();
-      const err = msg => { $('#eventName').addClass('error-border'); $('#name-error').text(msg).show(); };
-      if (!val) { err('Event name is required'); return false; }
-      if (val.length < 3) { err('Event name must be at least 3 characters'); return false; }
-      if (val.length > 100) { err('Event name too long (max 100 characters)'); return false; }
-      if (!/^[a-zA-Z0-9 \-']+$/.test(val)) { err('Event name contains invalid characters'); return false; }
-      $('#eventName').removeClass('error-border'); $('#name-error').hide(); return true;
+      if (!val) {
+        showNameError('Event name is required');
+        return false;
+      }
+      if (val.length < 3) {
+        showNameError('Event name must be at least 3 characters');
+        return false;
+      }
+      if (val.length > 100) {
+        showNameError('Event name too long (max 100 characters)');
+        return false;
+      }
+      if (!/^[a-zA-Z0-9 \-']+$/.test(val)) {
+        showNameError('Event name contains invalid characters');
+        return false;
+      }
+      $('#eventName').removeClass('error-border');
+      $('#name-error').hide();
+      return true;
     };
 
-    $('#eventDate').on('focus', () => { $('#eventDate').removeClass('error-border'); $('#date-error').hide(); });
-    $('#eventName').on('focus', () => { $('#eventName').removeClass('error-border'); $('#name-error').hide(); });
+    const showNameError = msg => {
+      $('#eventName').addClass('error-border');
+      $('#name-error').text(msg).show();
+    };
+
+    $('#eventDate').on('focus', () => {
+      $('#eventDate').removeClass('error-border');
+      $('#date-error').hide();
+    });
+    $('#eventName').on('focus', () => {
+      $('#eventName').removeClass('error-border');
+      $('#name-error').hide();
+    });
 
     $('#startBtn').on('click', async () => {
       if (!validateDate() | !validateName()) return;
+      running = true;
+      paused = false;
       $('#startBtn').prop('disabled', true);
-      $('#pauseBtn, #stopBtn').prop('disabled', false);
+      $('#pauseBtn').prop('disabled', false);
+      $('#stopBtn').prop('disabled', false);
       $('#eventDate, #eventName').prop('disabled', true);
       await startTimer();
     });
 
     $('#pauseBtn').on('click', async () => {
-      if (!paused) { await stopTimer(); paused = true; $('#pauseBtn').text('Resume'); }
-      else { await startTimer(); paused = false; $('#pauseBtn').text('Pause'); }
+      if (!paused) {
+        await stopTimer();
+        paused = true;
+        $('#pauseBtn').text('Resume');
+      } else {
+        await startTimer();
+        paused = false;
+        $('#pauseBtn').text('Pause');
+      }
     });
 
     $('#stopBtn').on('click', async () => {
       await stopTimer();
-      const sessions = getSessions();
-      sessions.unshift({ id: Date.now(), date: $('#eventDate').val(), name: $('#eventName').val().trim(), duration: totalSeconds });
-      localStorage.setItem('swSessions', JSON.stringify(sessions));
+      running = false;
+      const session = {
+        id: Date.now(),
+        date: $('#eventDate').val(),
+        name: $('#eventName').val().trim(),
+        duration: totalSeconds,
+        savedAt: new Date().toISOString()
+      };
+      saveSession(session);
       showNotification('Session saved!');
       resetState();
       renderHistory();
     });
 
-    $('#resetBtn').on('click', async () => { await stopTimer(); resetState(); });
-
-    $('#filterBtn').on('click', () => renderHistory($('#filterDate').val()));
-    $('#clearFilterBtn').on('click', () => { $('#filterDate').val(''); renderHistory(); });
-
-    const getSessions = () => { try { return JSON.parse(localStorage.getItem('swSessions')) || []; } catch { return []; } };
+    $('#resetBtn').on('click', async () => {
+      await stopTimer();
+      resetState();
+    });
 
     const resetState = () => {
-      paused = false; totalSeconds = 0;
-      $('#timerDisplay').text('00:00:00');
+      running = false;
+      paused = false;
+      totalSeconds = 0;
+      updateDisplay();
       $('#startBtn').prop('disabled', false);
       $('#pauseBtn').prop('disabled', true).text('Pause');
       $('#stopBtn').prop('disabled', true);
       $('#eventDate, #eventName').prop('disabled', false);
+      $('#eventDate').val(today);
       $('#eventName').val('');
-      $('#eventDate').val(new Date().toISOString().split('T')[0]);
+    };
+
+    const saveSession = session => {
+      const sessions = getSessions();
+      sessions.unshift(session);
+      localStorage.setItem('swSessions', JSON.stringify(sessions));
+    };
+
+    const getSessions = () => {
+      try { return JSON.parse(localStorage.getItem('swSessions')) || []; } catch { return []; }
     };
 
     const renderHistory = (filterDate = '') => {
       let sessions = getSessions();
       if (filterDate) sessions = sessions.filter(s => s.date === filterDate);
-      $('#totalSessions').text(sessions.length);
-      $('#totalTime').text(formatTime(sessions.reduce((a,s) => a + s.duration, 0)));
-      if (!sessions.length) { $('#historyList').html('<div class="empty-msg">No sessions recorded yet</div>'); return; }
-      $('#historyList').html(sessions.map(s => `
+
+      const totalCount = sessions.length;
+      const totalSecs = sessions.reduce((a, s) => a + s.duration, 0);
+      $('#totalSessions').text(totalCount);
+      $('#totalTime').text(formatTime(totalSecs));
+
+      if (sessions.length === 0) {
+        $('#historyList').html('<div class="empty-msg">No sessions recorded yet</div>');
+        return;
+      }
+      const html = sessions.map(s => `
         <div class="session-item">
-          <div class="session-info"><strong>${$('<div>').text(s.name).html()}</strong><small>${s.date}</small></div>
+          <div class="session-info">
+            <strong>${$('<div>').text(s.name).html()}</strong>
+            <small>${s.date}</small>
+          </div>
           <div class="session-duration">${formatTime(s.duration)}</div>
-        </div>`).join(''));
+        </div>
+      `).join('');
+      $('#historyList').html(html);
     };
+
+    $('#filterBtn').on('click', () => {
+      renderHistory($('#filterDate').val());
+    });
+
+    $('#clearFilterBtn').on('click', () => {
+      $('#filterDate').val('');
+      renderHistory();
+    });
 
     const showNotification = msg => {
       $('#notification').text(msg).fadeIn(300);

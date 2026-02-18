@@ -14,7 +14,6 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 16px;
         }
         .card {
           background: #fff;
@@ -24,41 +23,64 @@
           max-width: 420px;
           box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-        h1 { text-align: center; color: #0f3460; font-size: 26px; margin-bottom: 6px; }
-        .subtitle { text-align: center; color: #999; font-size: 14px; margin-bottom: 28px; }
-        .form-group { margin-bottom: 18px; }
-        label { display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 6px; }
+        h1 {
+          text-align: center;
+          color: #0f3460;
+          font-size: 26px;
+          margin-bottom: 8px;
+        }
+        .subtitle {
+          text-align: center;
+          color: #888;
+          font-size: 14px;
+          margin-bottom: 30px;
+        }
+        .form-group { margin-bottom: 20px; }
+        label {
+          display: block;
+          font-size: 14px;
+          font-weight: 600;
+          color: #333;
+          margin-bottom: 6px;
+        }
         input[type="email"], input[type="password"] {
           width: 100%;
           padding: 12px 14px;
           border: 2px solid #e0e0e0;
           border-radius: 8px;
           font-size: 15px;
+          transition: border-color 0.2s;
           outline: none;
-          transition: border-color 0.2s, box-shadow 0.2s;
         }
-        input:focus { border-color: #0f3460; box-shadow: 0 0 0 3px rgba(15,52,96,0.1); }
+        input:focus { border-color: #0f3460; }
         input.error-border { border-color: #e74c3c; }
-        .error-msg { color: #e74c3c; font-size: 12px; margin-top: 5px; display: none; }
-        .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; }
-        .checkbox-row label { margin: 0; font-weight: 400; color: #666; font-size: 14px; }
+        .error-msg {
+          color: #e74c3c;
+          font-size: 12px;
+          margin-top: 5px;
+          display: none;
+        }
+        .checkbox-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 24px;
+        }
+        .checkbox-row label { margin: 0; font-weight: 400; color: #555; }
         .btn-login {
           width: 100%;
           padding: 13px;
-          background: linear-gradient(135deg, #0f3460, #16213e);
+          background: #0f3460;
           color: #fff;
           border: none;
           border-radius: 8px;
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
-          transition: transform 0.1s, opacity 0.2s, box-shadow 0.2s;
-          box-shadow: 0 4px 15px rgba(15,52,96,0.4);
+          transition: background 0.2s, opacity 0.2s;
         }
-        .btn-login:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(15,52,96,0.5); }
-        .btn-login:active:not(:disabled) { transform: translateY(0); }
-        .btn-login:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
-        .cred-error { color: #e74c3c; font-size: 13px; text-align: center; margin-top: 12px; display: none; }
+        .btn-login:hover:not(:disabled) { background: #16213e; }
+        .btn-login:disabled { opacity: 0.4; cursor: not-allowed; }
         .success-msg {
           background: #d4edda;
           color: #155724;
@@ -66,11 +88,16 @@
           border-radius: 8px;
           padding: 12px;
           text-align: center;
-          margin-top: 14px;
+          margin-top: 16px;
           display: none;
-          font-size: 14px;
         }
-        @media (max-width: 480px) { .card { padding: 28px 20px; } }
+        .cred-error {
+          color: #e74c3c;
+          font-size: 13px;
+          text-align: center;
+          margin-top: 12px;
+          display: none;
+        }
     </style>
 </head>
 <body>
@@ -102,42 +129,85 @@
       { email: 'xiangyu@northeastern.edu', password: 'xiangyu1' }
     ];
 
-    let emailValid = false, passwordValid = false;
-
-    const showError = (input, errorEl, msg) => { $(input).addClass('error-border'); $(errorEl).text(msg).show(); };
-    const clearError = (input, errorEl) => { $(input).removeClass('error-border'); $(errorEl).hide(); };
-    const updateBtn = () => $('#loginBtn').prop('disabled', !(emailValid && passwordValid));
+    let emailValid = false;
+    let passwordValid = false;
 
     const validateEmail = () => {
       const val = $('#email').val().trim();
-      if (!val || !/^[^\s@]+@northeastern\.edu$/.test(val)) {
+      if (!val) {
         showError('#email', '#email-error', 'Please enter a valid Northeastern email');
         emailValid = false;
-      } else { clearError('#email', '#email-error'); emailValid = true; }
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) || !val.endsWith('@northeastern.edu')) {
+        showError('#email', '#email-error', 'Please enter a valid Northeastern email');
+        emailValid = false;
+      } else {
+        clearError('#email', '#email-error');
+        emailValid = true;
+      }
       updateBtn();
     };
 
     const validatePassword = () => {
       const val = $('#password').val();
-      if (!val) { showError('#password', '#password-error', 'Password is required'); passwordValid = false; }
-      else if (val.length < 8) { showError('#password', '#password-error', 'Password must be at least 8 characters'); passwordValid = false; }
-      else { clearError('#password', '#password-error'); passwordValid = true; }
+      if (!val) {
+        showError('#password', '#password-error', 'Password is required');
+        passwordValid = false;
+      } else if (val.length < 8) {
+        showError('#password', '#password-error', 'Password must be at least 8 characters');
+        passwordValid = false;
+      } else {
+        clearError('#password', '#password-error');
+        passwordValid = true;
+      }
       updateBtn();
     };
 
-    $('#email').on('keyup blur', validateEmail).on('focus', () => clearError('#email', '#email-error'));
-    $('#password').on('keyup blur', validatePassword).on('focus', () => clearError('#password', '#password-error'));
+    const showError = (input, errorEl, msg) => {
+      $(input).addClass('error-border');
+      $(errorEl).text(msg).show();
+    };
+
+    const clearError = (input, errorEl) => {
+      $(input).removeClass('error-border');
+      $(errorEl).hide();
+    };
+
+    const updateBtn = () => {
+      $('#loginBtn').prop('disabled', !(emailValid && passwordValid));
+    };
+
+    $('#email').on('keyup blur', validateEmail);
+    $('#password').on('keyup blur', validatePassword);
+
+    $('#email').on('focus', () => clearError('#email', '#email-error'));
+    $('#password').on('focus', () => clearError('#password', '#password-error'));
 
     $('#loginBtn').on('click', () => {
       const email = $('#email').val().trim();
       const password = $('#password').val();
       const user = users.find(u => u.email === email && u.password === password);
-      if (!user) { $('#cred-error').show(); return; }
+
+      if (!user) {
+        $('#cred-error').show();
+        return;
+      }
+
       $('#cred-error').hide();
-      const data = JSON.stringify({ username: email.split('@')[0], email, loginTimestamp: new Date().toISOString(), isLoggedIn: true });
-      if ($('#remember').is(':checked')) localStorage.setItem('userSession', data);
-      else sessionStorage.setItem('userSession', data);
-      $('#success-msg').fadeIn(400);
+      const username = email.split('@')[0];
+      const sessionData = JSON.stringify({
+        username,
+        email,
+        loginTimestamp: new Date().toISOString(),
+        isLoggedIn: true
+      });
+
+      if ($('#remember').is(':checked')) {
+        localStorage.setItem('userSession', sessionData);
+      } else {
+        sessionStorage.setItem('userSession', sessionData);
+      }
+
+      $('#success-msg').fadeIn();
       setTimeout(() => { window.location.href = 'calculator.html'; }, 2000);
     });
 </script>

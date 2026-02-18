@@ -22,9 +22,8 @@
           justify-content: space-between;
           align-items: center;
           color: #fff;
-          border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        header h2 { font-size: 18px; }
+        header h2 { font-size: 20px; }
         .btn-logout {
           background: #e74c3c;
           color: #fff;
@@ -52,7 +51,7 @@
           max-width: 460px;
           box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-        h1 { text-align: center; color: #0f3460; font-size: 24px; margin-bottom: 28px; }
+        h1 { text-align: center; color: #0f3460; font-size: 24px; margin-bottom: 30px; }
         .form-group { margin-bottom: 18px; }
         label { display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 6px; }
         input[type="text"] {
@@ -66,13 +65,18 @@
         }
         input:focus { border-color: #0f3460; }
         input.error-border { border-color: #e74c3c; }
-        input:disabled { background: #f5f5f5; color: #444; font-weight: 600; }
+        input:disabled {
+          background: #f5f5f5;
+          color: #555;
+          font-weight: 600;
+          border-color: #ccc;
+        }
         .error-msg { color: #e74c3c; font-size: 12px; margin-top: 5px; display: none; }
         .ops {
           display: grid;
-          grid-template-columns: repeat(4,1fr);
+          grid-template-columns: repeat(4, 1fr);
           gap: 10px;
-          margin: 22px 0;
+          margin: 24px 0;
         }
         .btn-op {
           padding: 13px;
@@ -81,18 +85,16 @@
           font-size: 15px;
           font-weight: 700;
           cursor: pointer;
-          color: #fff;
-          transition: transform 0.1s, box-shadow 0.2s;
-          box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+          transition: transform 0.1s, opacity 0.2s;
         }
-        .btn-op:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .btn-op:active { transform: translateY(0); }
-        .btn-add { background: #2ecc71; }
-        .btn-sub { background: #e74c3c; }
-        .btn-mul { background: #3498db; }
-        .btn-div { background: #f39c12; }
+        .btn-op:hover { transform: scale(1.05); }
+        .btn-op:active { transform: scale(0.97); }
+        .btn-add { background: #2ecc71; color: #fff; }
+        .btn-sub { background: #e74c3c; color: #fff; }
+        .btn-mul { background: #3498db; color: #fff; }
+        .btn-div { background: #f39c12; color: #fff; }
         @media (max-width: 400px) {
-          .ops { grid-template-columns: repeat(2,1fr); }
+          .ops { grid-template-columns: repeat(2, 1fr); }
           .card { padding: 24px; }
         }
     </style>
@@ -106,12 +108,12 @@
     <div class="card">
         <h1>Calculator</h1>
         <div class="form-group">
-            <label>Number 1</label>
+            <label for="num1">Number 1</label>
             <input type="text" id="num1" placeholder="Enter first number">
             <div class="error-msg" id="num1-error">Please enter a valid number</div>
         </div>
         <div class="form-group">
-            <label>Number 2</label>
+            <label for="num2">Number 2</label>
             <input type="text" id="num2" placeholder="Enter second number">
             <div class="error-msg" id="num2-error">Please enter a valid number</div>
         </div>
@@ -122,7 +124,7 @@
             <button class="btn-op btn-div" data-op="divide">Divide</button>
         </div>
         <div class="form-group">
-            <label>Result</label>
+            <label for="result">Result</label>
             <input type="text" id="result" disabled placeholder="Result will appear here">
         </div>
     </div>
@@ -134,7 +136,10 @@
     };
 
     const session = getSession();
-    if (!session || !session.isLoggedIn) window.location.href = 'login.html';
+    if (!session || !session.isLoggedIn) {
+      window.location.href = 'login.html';
+    }
+
     $('#welcomeMsg').text('Welcome, ' + session.username + '!');
 
     const calculate = (num1, num2, operation) => {
@@ -147,32 +152,41 @@
       }
     };
 
-    const isValid = val => val.trim() !== '' && /^-?\d+(\.\d+)?$/.test(val.trim());
+    const isValidNum = val => val.trim() !== '' && /^-?\d+(\.\d+)?$/.test(val.trim());
 
     const validateInput = (inputId, errorId) => {
-      if (!isValid($(inputId).val())) {
+      const val = $(inputId).val();
+      if (!isValidNum(val)) {
         $(inputId).addClass('error-border');
         $(errorId).show();
         return false;
       }
-      $(inputId).removeClass('error-border').css('border-color', '');
+      $(inputId).removeClass('error-border');
       $(errorId).hide();
       return true;
     };
 
     $('#num1, #num2').on('focus', function () {
-      $(this).removeClass('error-border').next('.error-msg').hide();
+      $(this).removeClass('error-border');
+      $(this).next('.error-msg').hide();
     });
 
     $('.btn-op').on('click', function () {
       const op = $(this).data('op');
-      if (!validateInput('#num1', '#num1-error') | !validateInput('#num2', '#num2-error')) return;
+      const v1 = validateInput('#num1', '#num1-error');
+      const v2 = validateInput('#num2', '#num2-error');
+      if (!v1 || !v2) return;
+
       const n1 = parseFloat($('#num1').val().trim());
       const n2 = parseFloat($('#num2').val().trim());
       const res = calculate(n1, n2, op);
-      const display = typeof res === 'number' ? (Number.isInteger(res) ? res : parseFloat(res.toFixed(10))) : res;
+
+      const display = typeof res === 'number'
+        ? (Number.isInteger(res) ? res : parseFloat(res.toFixed(10)))
+        : res;
+
       $('#result').val(display).css('border-color', '#2ecc71');
-      setTimeout(() => $('#result').css('border-color', ''), 1500);
+      setTimeout(() => $('#result').css('border-color', '#ccc'), 1500);
     });
 
     $('#logoutBtn').on('click', () => {

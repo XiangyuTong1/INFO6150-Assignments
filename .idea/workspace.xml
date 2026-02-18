@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d8eddf9-8019-4cfe-9bea-504426a834df" name="Changes" comment="Add login page with jQuery validation">
+    <list default="true" id="7d8eddf9-8019-4cfe-9bea-504426a834df" name="Changes" comment="Add calculator page with auth check">
       <change beforePath="$PROJECT_DIR$/Assignment6/calculator.html" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment6/calculator.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assignment6/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment6/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assignment6/stopwatch.html" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment6/stopwatch.html" afterDir="false" />
@@ -252,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771458278304</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Add calculator page with auth check">
+      <option name="closed" value="true" />
+      <created>1771458335174</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1771458335174</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -296,6 +304,7 @@
     <MESSAGE value="Add AI Assistant chatbot" />
     <MESSAGE value="Initial project setup for Assignment 6" />
     <MESSAGE value="Add login page with jQuery validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add login page with jQuery validation" />
+    <MESSAGE value="Add calculator page with auth check" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add calculator page with auth check" />
   </component>
 </project>
