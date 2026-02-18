@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -25,13 +26,20 @@
         h1 { text-align: center; color: #333; margin-bottom: 24px; }
         .form-group { margin-bottom: 16px; }
         label { display: block; font-size: 14px; color: #555; margin-bottom: 4px; }
-        input {
+        input[type="email"], input[type="password"] {
           width: 100%;
           padding: 10px;
           border: 1px solid #ddd;
           border-radius: 4px;
           font-size: 14px;
+          outline: none;
+          transition: border-color 0.2s;
         }
+        input:focus { border-color: #0f3460; }
+        input.error-border { border-color: #e74c3c; }
+        .error-msg { color: #e74c3c; font-size: 12px; margin-top: 4px; display: none; }
+        .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+        .checkbox-row label { margin: 0; font-size: 14px; }
         .btn-login {
           width: 100%;
           padding: 12px;
@@ -41,7 +49,19 @@
           border-radius: 4px;
           font-size: 15px;
           cursor: pointer;
-          margin-top: 8px;
+          transition: opacity 0.2s;
+        }
+        .btn-login:disabled { opacity: 0.4; cursor: not-allowed; }
+        .cred-error { color: #e74c3c; font-size: 13px; text-align: center; margin-top: 10px; display: none; }
+        .success-msg {
+          background: #d4edda;
+          color: #155724;
+          border: 1px solid #c3e6cb;
+          border-radius: 4px;
+          padding: 10px;
+          text-align: center;
+          margin-top: 12px;
+          display: none;
         }
     </style>
 </head>
@@ -51,16 +71,90 @@
     <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="yourname@northeastern.edu">
+        <div class="error-msg" id="email-error"></div>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
         <input type="password" id="password" placeholder="Enter your password">
+        <div class="error-msg" id="password-error"></div>
     </div>
-    <div style="margin-bottom:16px;">
+    <div class="checkbox-row">
         <input type="checkbox" id="remember">
-        <label for="remember" style="display:inline;margin-left:6px;">Remember Me</label>
+        <label for="remember">Remember Me</label>
     </div>
-    <button class="btn-login" id="loginBtn">Login</button>
+    <button class="btn-login" id="loginBtn" disabled>Login</button>
+    <div class="cred-error" id="cred-error">Invalid email or password</div>
+    <div class="success-msg" id="success-msg">Login successful! Redirecting...</div>
 </div>
+<script>
+    const users = [
+      { email: 'alice@northeastern.edu', password: 'alice1234' },
+      { email: 'bob@northeastern.edu', password: 'bobpass99' },
+      { email: 'xiangyu@northeastern.edu', password: 'xiangyu1' }
+    ];
+
+    let emailValid = false;
+    let passwordValid = false;
+
+    const showError = (input, errorEl, msg) => {
+      $(input).addClass('error-border');
+      $(errorEl).text(msg).show();
+    };
+
+    const clearError = (input, errorEl) => {
+      $(input).removeClass('error-border');
+      $(errorEl).hide();
+    };
+
+    const updateBtn = () => $('#loginBtn').prop('disabled', !(emailValid && passwordValid));
+
+    const validateEmail = () => {
+      const val = $('#email').val().trim();
+      if (!val || !/^[^\s@]+@northeastern\.edu$/.test(val)) {
+        showError('#email', '#email-error', 'Please enter a valid Northeastern email');
+        emailValid = false;
+      } else {
+        clearError('#email', '#email-error');
+        emailValid = true;
+      }
+      updateBtn();
+    };
+
+    const validatePassword = () => {
+      const val = $('#password').val();
+      if (!val) {
+        showError('#password', '#password-error', 'Password is required');
+        passwordValid = false;
+      } else if (val.length < 8) {
+        showError('#password', '#password-error', 'Password must be at least 8 characters');
+        passwordValid = false;
+      } else {
+        clearError('#password', '#password-error');
+        passwordValid = true;
+      }
+      updateBtn();
+    };
+
+    $('#email').on('keyup blur', validateEmail).on('focus', () => clearError('#email', '#email-error'));
+    $('#password').on('keyup blur', validatePassword).on('focus', () => clearError('#password', '#password-error'));
+
+    $('#loginBtn').on('click', () => {
+      const email = $('#email').val().trim();
+      const password = $('#password').val();
+      const user = users.find(u => u.email === email && u.password === password);
+      if (!user) { $('#cred-error').show(); return; }
+      $('#cred-error').hide();
+      const data = JSON.stringify({
+        username: email.split('@')[0],
+        email,
+        loginTimestamp: new Date().toISOString(),
+        isLoggedIn: true
+      });
+      if ($('#remember').is(':checked')) localStorage.setItem('userSession', data);
+      else sessionStorage.setItem('userSession', data);
+      $('#success-msg').fadeIn();
+      setTimeout(() => { window.location.href = 'calculator.html'; }, 2000);
+    });
+</script>
 </body>
 </html>
