@@ -9,65 +9,74 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
           font-family: 'Segoe UI', sans-serif;
-          background: #f0f2f5;
+          background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
           min-height: 100vh;
           display: flex;
           align-items: center;
           justify-content: center;
+          padding: 16px;
         }
         .card {
           background: #fff;
-          border-radius: 8px;
+          border-radius: 16px;
           padding: 40px;
           width: 100%;
-          max-width: 400px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          max-width: 420px;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-        h1 { text-align: center; color: #333; margin-bottom: 24px; }
-        .form-group { margin-bottom: 16px; }
-        label { display: block; font-size: 14px; color: #555; margin-bottom: 4px; }
+        h1 { text-align: center; color: #0f3460; font-size: 26px; margin-bottom: 6px; }
+        .subtitle { text-align: center; color: #999; font-size: 14px; margin-bottom: 28px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 6px; }
         input[type="email"], input[type="password"] {
           width: 100%;
-          padding: 10px;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          font-size: 14px;
+          padding: 12px 14px;
+          border: 2px solid #e0e0e0;
+          border-radius: 8px;
+          font-size: 15px;
           outline: none;
-          transition: border-color 0.2s;
+          transition: border-color 0.2s, box-shadow 0.2s;
         }
-        input:focus { border-color: #0f3460; }
+        input:focus { border-color: #0f3460; box-shadow: 0 0 0 3px rgba(15,52,96,0.1); }
         input.error-border { border-color: #e74c3c; }
-        .error-msg { color: #e74c3c; font-size: 12px; margin-top: 4px; display: none; }
-        .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
-        .checkbox-row label { margin: 0; font-size: 14px; }
+        .error-msg { color: #e74c3c; font-size: 12px; margin-top: 5px; display: none; }
+        .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; }
+        .checkbox-row label { margin: 0; font-weight: 400; color: #666; font-size: 14px; }
         .btn-login {
           width: 100%;
-          padding: 12px;
-          background: #0f3460;
+          padding: 13px;
+          background: linear-gradient(135deg, #0f3460, #16213e);
           color: #fff;
           border: none;
-          border-radius: 4px;
-          font-size: 15px;
+          border-radius: 8px;
+          font-size: 16px;
+          font-weight: 600;
           cursor: pointer;
-          transition: opacity 0.2s;
+          transition: transform 0.1s, opacity 0.2s, box-shadow 0.2s;
+          box-shadow: 0 4px 15px rgba(15,52,96,0.4);
         }
-        .btn-login:disabled { opacity: 0.4; cursor: not-allowed; }
-        .cred-error { color: #e74c3c; font-size: 13px; text-align: center; margin-top: 10px; display: none; }
+        .btn-login:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(15,52,96,0.5); }
+        .btn-login:active:not(:disabled) { transform: translateY(0); }
+        .btn-login:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+        .cred-error { color: #e74c3c; font-size: 13px; text-align: center; margin-top: 12px; display: none; }
         .success-msg {
           background: #d4edda;
           color: #155724;
           border: 1px solid #c3e6cb;
-          border-radius: 4px;
-          padding: 10px;
+          border-radius: 8px;
+          padding: 12px;
           text-align: center;
-          margin-top: 12px;
+          margin-top: 14px;
           display: none;
+          font-size: 14px;
         }
+        @media (max-width: 480px) { .card { padding: 28px 20px; } }
     </style>
 </head>
 <body>
 <div class="card">
-    <h1>Login</h1>
+    <h1>Welcome Back</h1>
+    <p class="subtitle">Sign in to your account</p>
     <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="yourname@northeastern.edu">
@@ -93,19 +102,10 @@
       { email: 'xiangyu@northeastern.edu', password: 'xiangyu1' }
     ];
 
-    let emailValid = false;
-    let passwordValid = false;
+    let emailValid = false, passwordValid = false;
 
-    const showError = (input, errorEl, msg) => {
-      $(input).addClass('error-border');
-      $(errorEl).text(msg).show();
-    };
-
-    const clearError = (input, errorEl) => {
-      $(input).removeClass('error-border');
-      $(errorEl).hide();
-    };
-
+    const showError = (input, errorEl, msg) => { $(input).addClass('error-border'); $(errorEl).text(msg).show(); };
+    const clearError = (input, errorEl) => { $(input).removeClass('error-border'); $(errorEl).hide(); };
     const updateBtn = () => $('#loginBtn').prop('disabled', !(emailValid && passwordValid));
 
     const validateEmail = () => {
@@ -113,25 +113,15 @@
       if (!val || !/^[^\s@]+@northeastern\.edu$/.test(val)) {
         showError('#email', '#email-error', 'Please enter a valid Northeastern email');
         emailValid = false;
-      } else {
-        clearError('#email', '#email-error');
-        emailValid = true;
-      }
+      } else { clearError('#email', '#email-error'); emailValid = true; }
       updateBtn();
     };
 
     const validatePassword = () => {
       const val = $('#password').val();
-      if (!val) {
-        showError('#password', '#password-error', 'Password is required');
-        passwordValid = false;
-      } else if (val.length < 8) {
-        showError('#password', '#password-error', 'Password must be at least 8 characters');
-        passwordValid = false;
-      } else {
-        clearError('#password', '#password-error');
-        passwordValid = true;
-      }
+      if (!val) { showError('#password', '#password-error', 'Password is required'); passwordValid = false; }
+      else if (val.length < 8) { showError('#password', '#password-error', 'Password must be at least 8 characters'); passwordValid = false; }
+      else { clearError('#password', '#password-error'); passwordValid = true; }
       updateBtn();
     };
 
@@ -144,15 +134,10 @@
       const user = users.find(u => u.email === email && u.password === password);
       if (!user) { $('#cred-error').show(); return; }
       $('#cred-error').hide();
-      const data = JSON.stringify({
-        username: email.split('@')[0],
-        email,
-        loginTimestamp: new Date().toISOString(),
-        isLoggedIn: true
-      });
+      const data = JSON.stringify({ username: email.split('@')[0], email, loginTimestamp: new Date().toISOString(), isLoggedIn: true });
       if ($('#remember').is(':checked')) localStorage.setItem('userSession', data);
       else sessionStorage.setItem('userSession', data);
-      $('#success-msg').fadeIn();
+      $('#success-msg').fadeIn(400);
       setTimeout(() => { window.location.href = 'calculator.html'; }, 2000);
     });
 </script>
