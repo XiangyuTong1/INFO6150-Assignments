@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d8eddf9-8019-4cfe-9bea-504426a834df" name="Changes" comment="Complete add student, delete student, edit student features and social media icons">
+    <list default="true" id="7d8eddf9-8019-4cfe-9bea-504426a834df" name="Changes" comment="Initial project setup for Assignment 6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,6 +38,9 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="38DPpnCnVSSIV2tIv5sfycN3BOL" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -167,8 +170,87 @@
       <option name="project" value="LOCAL" />
       <updated>1769647655299</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Complete add student, delete student, edit student features and social media icons">
+      <option name="closed" value="true" />
+      <created>1769647737161</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1769647737161</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Initial Form Structure and Basic Styling">
+      <option name="closed" value="true" />
+      <created>1770257013647</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1770257013647</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Form Validation Implementation">
+      <option name="closed" value="true" />
+      <created>1770257073215</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1770257073215</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Dynamic Features (Select List, Checkboxes, Table)">
+      <option name="closed" value="true" />
+      <created>1770257189605</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1770257189605</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Advanced Input Features (Phone Masking &amp; Character Counter)">
+      <option name="closed" value="true" />
+      <created>1770257256221</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1770257256221</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add AI Assistant chatbot">
+      <option name="closed" value="true" />
+      <created>1770257477500</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1770257477500</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Initial project setup for Assignment 6">
+      <option name="closed" value="true" />
+      <created>1771457490410</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1771457490410</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Basic Structure + Header + Navigation" />
@@ -181,6 +263,12 @@
     <MESSAGE value="Implement page load initialization and dropdown toggle functionality" />
     <MESSAGE value="Add checkbox selection functionality with dynamic Delete and Edit buttons" />
     <MESSAGE value="Complete add student, delete student, edit student features and social media icons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete add student, delete student, edit student features and social media icons" />
+    <MESSAGE value="Initial Form Structure and Basic Styling" />
+    <MESSAGE value="Form Validation Implementation" />
+    <MESSAGE value="Dynamic Features (Select List, Checkboxes, Table)" />
+    <MESSAGE value="Advanced Input Features (Phone Masking &amp; Character Counter)" />
+    <MESSAGE value="Add AI Assistant chatbot" />
+    <MESSAGE value="Initial project setup for Assignment 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial project setup for Assignment 6" />
   </component>
 </project>
