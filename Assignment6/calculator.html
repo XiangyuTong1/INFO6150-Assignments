@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+          font-family: 'Segoe UI', sans-serif;
+          background: #f0f2f5;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+        header {
+          background: #0f3460;
+          color: #fff;
+          padding: 16px 24px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        main {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 16px;
+        }
+        .card {
+          background: #fff;
+          border-radius: 8px;
+          padding: 40px;
+          width: 100%;
+          max-width: 440px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { text-align: center; color: #333; margin-bottom: 24px; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-size: 14px; color: #555; margin-bottom: 4px; }
+        input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 14px;
+        }
+        .ops {
+          display: grid;
+          grid-template-columns: repeat(4,1fr);
+          gap: 8px;
+          margin: 20px 0;
+        }
+        .btn-op {
+          padding: 12px;
+          border: none;
+          border-radius: 4px;
+          background: #0f3460;
+          color: #fff;
+          font-size: 14px;
+          cursor: pointer;
+        }
+        .btn-logout {
+          background: transparent;
+          border: 1px solid #fff;
+          color: #fff;
+          padding: 6px 14px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <span id="welcomeMsg">Welcome!</span>
+    <button class="btn-logout" id="logoutBtn">Logout</button>
+</header>
+<main>
+    <div class="card">
+        <h1>Calculator</h1>
+        <div class="form-group">
+            <label>Number 1</label>
+            <input type="text" id="num1" placeholder="Enter first number">
+        </div>
+        <div class="form-group">
+            <label>Number 2</label>
+            <input type="text" id="num2" placeholder="Enter second number">
+        </div>
+        <div class="ops">
+            <button class="btn-op" data-op="add">Add</button>
+            <button class="btn-op" data-op="subtract">Subtract</button>
+            <button class="btn-op" data-op="multiply">Multiply</button>
+            <button class="btn-op" data-op="divide">Divide</button>
+        </div>
+        <div class="form-group">
+            <label>Result</label>
+            <input type="text" id="result" disabled placeholder="Result">
+        </div>
+    </div>
+</main>
+</body>
+</html>
