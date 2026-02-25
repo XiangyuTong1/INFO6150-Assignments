@@ -1,0 +1,120 @@
+.hero {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: $space-4xl;
+  min-height: calc(100vh - #{$header-height});
+  padding-block: $space-4xl;
+
+  @include respond-to(lg) {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-block: $space-3xl;
+  }
+
+  &__tag {
+    @extend %badge;
+    background: tint($color-primary, 85%);
+    color: $color-primary;
+    margin-bottom: $space-lg;
+    display: inline-block;
+  }
+
+  &__title {
+    font-size: fluid(2.2rem, 3.8rem);
+    color: $color-dark;
+    margin-bottom: $space-lg;
+    line-height: 1.1;
+
+    em {
+      font-style: italic;
+      color: $color-primary;
+    }
+  }
+
+  &__sub {
+    font-size: $font-size-md;
+    color: $color-text-light;
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: $space-2xl;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $space-md;
+    flex-wrap: wrap;
+  }
+
+  &__visual {
+    position: relative;
+
+    @include respond-to(lg) {
+      display: none;
+    }
+  }
+
+  &__img-wrap {
+    @extend %img-ratio;
+    border-radius: $radius-lg;
+    height: 540px;
+    box-shadow: $shadow-xl;
+
+    img {
+      @include img-cover;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    bottom: $space-xl;
+    left: -$space-xl;
+    background: $color-white;
+    border-radius: $radius-md;
+    padding: $space-md $space-lg;
+    box-shadow: $shadow-lg;
+    text-align: center;
+
+    &-num {
+      display: block;
+      font-family: $font-heading;
+      font-size: $font-size-2xl;
+      font-weight: 700;
+      color: $color-primary;
+    }
+
+    &-txt {
+      font-size: $font-size-xs;
+      color: $color-text-light;
+      font-weight: 500;
+    }
+  }
+}
+
+.page-hero {
+  background: linear-gradient(135deg, tint($color-primary, 92%) 0%, tint($color-accent, 90%) 100%);
+  padding-block: $space-4xl;
+  text-align: center;
+
+  &__content {
+    @include container;
+    max-width: 640px;
+  }
+
+  &__title {
+    font-size: fluid(2rem, 3rem);
+    color: $color-dark;
+    margin-block: $space-md $space-lg;
+
+    em {
+      color: $color-primary;
+      font-style: italic;
+    }
+  }
+
+  p {
+    color: $color-text-light;
+    font-size: $font-size-md;
+  }
+}

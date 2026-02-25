@@ -1,0 +1,293 @@
+.stats {
+  background: $color-dark;
+  padding-block: $space-3xl;
+
+  &__grid {
+    @include container;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-xl;
+    text-align: center;
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+  }
+
+  &__num {
+    font-family: $font-heading;
+    font-size: $font-size-3xl;
+    font-weight: 700;
+    color: $color-accent;
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    color: rgba($color-white, 0.6);
+    font-weight: 500;
+  }
+}
+
+$cat-colors: (
+  breakfast: (#fff3e0, #e65100),
+  lunch:     (#e8f5e9, #2e7d32),
+  dinner:    (#fce4ec, #c62828),
+  dessert:   (#f3e5f5, #6a1b9a),
+  drinks:    (#e3f2fd, #1565c0),
+  snacks:    (#fff8e1, #f57f17),
+);
+
+.categories {
+  @extend %section-padding;
+
+  .cat-flex {
+    @include container;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-lg;
+    justify-content: center;
+  }
+}
+
+.cat-item {
+  @include flex-center;
+  flex-direction: column;
+  gap: $space-sm;
+  width: 140px;
+  height: 140px;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  @each $name, $vals in $cat-colors {
+    &--#{$name} {
+      $bg: nth($vals, 1);
+      $fg: nth($vals, 2);
+      background: $bg;
+
+      .cat-item__name {
+        color: $fg;
+      }
+
+      &:hover {
+        transform: translateY(-6px) scale(1.04);
+        box-shadow: 0 12px 32px alpha($fg, 0.25);
+      }
+    }
+  }
+
+  &__icon {
+    font-size: 2.5rem;
+  }
+
+  &__name {
+    font-size: $font-size-sm;
+    font-weight: 600;
+  }
+}
+
+.newsletter {
+  background: linear-gradient(135deg, $color-primary 0%, shade($color-primary, 25%) 100%);
+  padding-block: $space-4xl;
+
+  &__inner {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-2xl;
+    flex-wrap: wrap;
+  }
+
+  &__text {
+    h2 {
+      font-size: $font-size-2xl;
+      color: $color-white;
+      margin-bottom: $space-sm;
+    }
+
+    p {
+      color: rgba($color-white, 0.8);
+    }
+  }
+
+  &__form {
+    display: flex;
+    gap: $space-sm;
+    flex: 1;
+    max-width: 480px;
+
+    @include respond-to(md) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  &__input {
+    @extend %input-base;
+    background: rgba($color-white, 0.15);
+    border-color: rgba($color-white, 0.3);
+    color: $color-white;
+
+    &::placeholder {
+      color: rgba($color-white, 0.6);
+    }
+
+    &:focus {
+      border-color: $color-white;
+      box-shadow: 0 0 0 3px rgba($color-white, 0.2);
+    }
+  }
+}
+
+.recipe-layout {
+  @include container;
+  display: grid;
+  grid-template-columns: #{$sidebar-width} 1fr;
+  gap: $space-3xl;
+  padding-block: $space-3xl;
+
+  @include respond-to(lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar {
+  @include respond-to(lg) {
+    display: none;
+  }
+
+  &__block {
+    margin-bottom: $space-2xl;
+  }
+
+  &__title {
+    font-family: $font-body;
+    font-size: $font-size-sm;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-dark;
+    margin-bottom: $space-md;
+    padding-bottom: $space-sm;
+    border-bottom: 2px solid $color-border;
+  }
+}
+
+.search-box {
+  display: flex;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  overflow: hidden;
+
+  &__input {
+    flex: 1;
+    padding: $space-sm $space-md;
+    border: none;
+    font-family: $font-body;
+    font-size: $font-size-sm;
+    outline: none;
+  }
+
+  &__btn {
+    @include button-reset;
+    padding: $space-sm $space-md;
+    background: $color-bg-alt;
+    border-left: 1px solid $color-border;
+  }
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+
+  li label {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-primary;
+    }
+
+    input {
+      accent-color: $color-primary;
+    }
+  }
+}
+
+.recipe-toolbar {
+  @include flex-between;
+  margin-bottom: $space-xl;
+  flex-wrap: wrap;
+  gap: $space-md;
+}
+
+.recipe-count {
+  font-size: $font-size-sm;
+  color: $color-text-light;
+}
+
+.sort-flex {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  font-size: $font-size-sm;
+}
+
+.sort-select {
+  padding: $space-xs $space-md;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  font-family: $font-body;
+  font-size: $font-size-sm;
+  outline: none;
+  cursor: pointer;
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+
+.pagination {
+  display: flex;
+  gap: $space-sm;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-btn {
+  @include button-reset;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-border;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+
+  &--active {
+    background: $color-primary;
+    border-color: $color-primary;
+    color: $color-white;
+  }
+}
+
+.page-ellipsis {
+  color: $color-text-light;
+}

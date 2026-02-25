@@ -1,0 +1,63 @@
+$btn-variants: (
+  'primary': ($color-primary, $color-white),
+  'secondary': ($color-secondary, $color-white),
+  'ghost': (transparent, $color-primary),
+  'outline': (transparent, $color-primary),
+);
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm $space-xl;
+  border-radius: $radius-full;
+  font-family: $font-body;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all $transition-base;
+  border: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+
+  @each $name, $vals in $btn-variants {
+    $bg: nth($vals, 1);
+    $fg: nth($vals, 2);
+
+    &--#{$name} {
+      background: $bg;
+      color: $fg;
+
+      @if $name == 'primary' {
+        border-color: $bg;
+
+        &:hover {
+          background: shade($color-primary, 15%);
+          border-color: shade($color-primary, 15%);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px alpha($color-primary, 0.35);
+        }
+      } @else if $name == 'ghost' {
+        border-color: $color-primary;
+
+        &:hover {
+          background: $color-primary;
+          color: $color-white;
+        }
+      } @else if $name == 'outline' {
+        border-color: $color-primary;
+
+        &:hover {
+          background: $color-primary;
+          color: $color-white;
+        }
+      } @else {
+        border-color: $bg;
+
+        &:hover {
+          background: shade($bg, 10%);
+        }
+      }
+    }
+  }
+}

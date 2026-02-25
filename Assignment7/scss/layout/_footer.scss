@@ -1,0 +1,74 @@
+.site-footer {
+  background: $color-dark;
+  color: rgba($color-white, 0.7);
+  padding-top: $space-4xl;
+
+  .footer-grid {
+    @include container;
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: $space-2xl;
+    padding-bottom: $space-3xl;
+
+    @include respond-to(lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .footer-brand {
+    .logo {
+      font-family: $font-heading;
+      font-size: $font-size-xl;
+      font-weight: 700;
+      color: $color-white;
+      display: block;
+      margin-bottom: $space-md;
+    }
+
+    p {
+      font-size: $font-size-sm;
+      line-height: 1.7;
+    }
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+
+    h4 {
+      font-family: $font-body;
+      font-size: $font-size-sm;
+      font-weight: 600;
+      color: $color-white;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: $space-sm;
+    }
+
+    a {
+      font-size: $font-size-sm;
+      color: rgba($color-white, 0.6);
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $color-accent;
+      }
+    }
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba($color-white, 0.1);
+    padding-block: $space-lg;
+    text-align: center;
+
+    p {
+      font-size: $font-size-xs;
+      color: rgba($color-white, 0.4);
+    }
+  }
+}
