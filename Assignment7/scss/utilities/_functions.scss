@@ -1,0 +1,36 @@
+@use 'sass:math';
+@use 'sass:color';
+
+@function rem($px) {
+  @return math.div($px, 16) * 1rem;
+}
+
+@function alpha($clr, $opacity) {
+  @return rgba($clr, $opacity);
+}
+
+@function tint($clr, $pct) {
+  @return color.mix(white, $clr, $pct);
+}
+
+@function shade($clr, $pct) {
+  @return color.mix(black, $clr, $pct);
+}
+
+@function fluid($min, $max, $min-vw: 320px, $max-vw: 1200px) {
+  $slope: math.div($max - $min, $max-vw - $min-vw);
+  $intercept: $min - $slope * $min-vw;
+  @return clamp(#{$min}, #{$intercept} + #{$slope * 100vw}, #{$max});
+}
+
+@function z($layer) {
+  $layers: (
+    'base': 0,
+    'card': 10,
+    'dropdown': 100,
+    'header': 200,
+    'modal': 300,
+    'toast': 400
+  );
+  @return map-get($layers, $layer);
+}
