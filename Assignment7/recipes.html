@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipes — Savoria</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="site-header">
+    <div class="header-inner">
+        <a href="index.html" class="logo">Savoria</a>
+        <nav class="nav">
+            <a href="index.html" class="nav__link">Home</a>
+            <a href="recipes.html" class="nav__link nav__link--active">Recipes</a>
+            <a href="index.html#featured" class="nav__link">Featured</a>
+            <a href="index.html#newsletter" class="nav__link">Newsletter</a>
+        </nav>
+        <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+</header>
+
+<section class="page-hero">
+    <div class="page-hero__content">
+        <span class="section-tag">All Recipes</span>
+        <h1 class="page-hero__title">Discover Your Next <em>Favorite</em> Dish</h1>
+        <p>From quick weeknight dinners to weekend showstoppers — find recipes for every occasion.</p>
+    </div>
+</section>
+
+<section class="recipe-layout">
+    <aside class="sidebar">
+        <div class="sidebar__block">
+            <h3 class="sidebar__title">Search</h3>
+            <div class="search-box">
+                <input type="text" placeholder="Search recipes..." class="search-box__input" />
+                <button class="search-box__btn">🔍</button>
+            </div>
+        </div>
+        <div class="sidebar__block">
+            <h3 class="sidebar__title">Category</h3>
+            <ul class="filter-list">
+                <li><label><input type="checkbox" checked /> All</label></li>
+                <li><label><input type="checkbox" /> Breakfast</label></li>
+                <li><label><input type="checkbox" /> Lunch</label></li>
+                <li><label><input type="checkbox" /> Dinner</label></li>
+                <li><label><input type="checkbox" /> Dessert</label></li>
+                <li><label><input type="checkbox" /> Drinks</label></li>
+            </ul>
+        </div>
+        <div class="sidebar__block">
+            <h3 class="sidebar__title">Cuisine</h3>
+            <ul class="filter-list">
+                <li><label><input type="checkbox" /> Italian</label></li>
+                <li><label><input type="checkbox" /> Japanese</label></li>
+                <li><label><input type="checkbox" /> Mexican</label></li>
+                <li><label><input type="checkbox" /> Indian</label></li>
+                <li><label><input type="checkbox" /> American</label></li>
+            </ul>
+        </div>
+        <div class="sidebar__block">
+            <h3 class="sidebar__title">Cook Time</h3>
+            <ul class="filter-list">
+                <li><label><input type="radio" name="time" /> Under 15 min</label></li>
+                <li><label><input type="radio" name="time" /> 15–30 min</label></li>
+                <li><label><input type="radio" name="time" /> 30–60 min</label></li>
+                <li><label><input type="radio" name="time" /> Over 60 min</label></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="recipe-main">
+        <div class="recipe-toolbar">
+            <p class="recipe-count">Showing <strong>12</strong> recipes</p>
+            <div class="sort-flex">
+                <label>Sort by:</label>
+                <select class="sort-select">
+                    <option>Most Popular</option>
+                    <option>Newest</option>
+                    <option>Cook Time</option>
+                    <option>Rating</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="recipe-grid">
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=600&q=80" alt="Carbonara" />
+                    <span class="rcard__badge">Popular</span>
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Italian</span>
+                    <h3 class="rcard__title">Classic Pasta Carbonara</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 30 min</span>
+                        <span>👤 4</span>
+                        <span>⭐ 4.9</span>
+                    </div>
+                    <p class="rcard__desc">Rich egg-yolk sauce with guanciale and Pecorino Romano.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Grain Bowl" />
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Healthy</span>
+                    <h3 class="rcard__title">Rainbow Grain Bowl</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 15 min</span>
+                        <span>👤 2</span>
+                        <span>⭐ 4.7</span>
+                    </div>
+                    <p class="rcard__desc">Vibrant, nutritious bowl packed with seasonal produce.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="Pancakes" />
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Breakfast</span>
+                    <h3 class="rcard__title">Fluffy Buttermilk Pancakes</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 20 min</span>
+                        <span>👤 4</span>
+                        <span>⭐ 4.8</span>
+                    </div>
+                    <p class="rcard__desc">The fluffiest pancakes you'll ever make at home.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600&q=80" alt="Sushi" />
+                    <span class="rcard__badge rcard__badge--new">New</span>
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Japanese</span>
+                    <h3 class="rcard__title">Homemade Sushi Rolls</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 60 min</span>
+                        <span>👤 4</span>
+                        <span>⭐ 4.9</span>
+                    </div>
+                    <p class="rcard__desc">Master the art of sushi rolling at home.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600&q=80" alt="Tacos" />
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Mexican</span>
+                    <h3 class="rcard__title">Street-Style Tacos</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 25 min</span>
+                        <span>👤 3</span>
+                        <span>⭐ 4.6</span>
+                    </div>
+                    <p class="rcard__desc">Authentic street flavors with fresh toppings.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Steak" />
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Dinner</span>
+                    <h3 class="rcard__title">Pan-Seared Ribeye Steak</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 20 min</span>
+                        <span>👤 2</span>
+                        <span>⭐ 5.0</span>
+                    </div>
+                    <p class="rcard__desc">Restaurant-quality steak with herb butter.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&q=80" alt="Dessert" />
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Dessert</span>
+                    <h3 class="rcard__title">Lemon Tart</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 90 min</span>
+                        <span>👤 8</span>
+                        <span>⭐ 4.8</span>
+                    </div>
+                    <p class="rcard__desc">Bright and tangy lemon curd in a buttery pastry shell.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Salad" />
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Lunch</span>
+                    <h3 class="rcard__title">Mediterranean Salad</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 10 min</span>
+                        <span>👤 2</span>
+                        <span>⭐ 4.5</span>
+                    </div>
+                    <p class="rcard__desc">Crisp vegetables, olives, and feta with lemon dressing.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Curry" />
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Indian</span>
+                    <h3 class="rcard__title">Butter Chicken Curry</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 45 min</span>
+                        <span>👤 4</span>
+                        <span>⭐ 4.9</span>
+                    </div>
+                    <p class="rcard__desc">Creamy tomato-based curry with tender chicken.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Waffles" />
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Breakfast</span>
+                    <h3 class="rcard__title">Crispy Belgian Waffles</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 25 min</span>
+                        <span>👤 4</span>
+                        <span>⭐ 4.7</span>
+                    </div>
+                    <p class="rcard__desc">Golden and crisp on outside, soft and airy inside.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600&q=80" alt="Pasta" />
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Italian</span>
+                    <h3 class="rcard__title">Pesto Genovese Pasta</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 20 min</span>
+                        <span>👤 3</span>
+                        <span>⭐ 4.8</span>
+                    </div>
+                    <p class="rcard__desc">Fragrant basil pesto tossed with fresh trofie pasta.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+
+            <article class="rcard">
+                <div class="rcard__img-wrap">
+                    <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=80" alt="Toast" />
+                    <span class="rcard__badge rcard__badge--new">New</span>
+                </div>
+                <div class="rcard__body">
+                    <span class="rcard__cat">Breakfast</span>
+                    <h3 class="rcard__title">Avocado Toast Variations</h3>
+                    <div class="rcard__info">
+                        <span>⏱ 10 min</span>
+                        <span>👤 1</span>
+                        <span>⭐ 4.6</span>
+                    </div>
+                    <p class="rcard__desc">Five creative takes on the beloved avocado toast.</p>
+                    <button class="btn btn--outline">View Recipe</button>
+                </div>
+            </article>
+        </div>
+
+        <div class="pagination">
+            <button class="page-btn page-btn--active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <span class="page-ellipsis">...</span>
+            <button class="page-btn">10</button>
+        </div>
+    </main>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="index.html" class="logo">Savoria</a>
+            <p>Bringing joy through food, one recipe at a time.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Explore</h4>
+            <a href="index.html">Home</a>
+            <a href="recipes.html">Recipes</a>
+            <a href="#">About</a>
+        </div>
+        <div class="footer-links">
+            <h4>Categories</h4>
+            <a href="#">Breakfast</a>
+            <a href="#">Lunch</a>
+            <a href="#">Dinner</a>
+        </div>
+        <div class="footer-links">
+            <h4>Connect</h4>
+            <a href="#">Instagram</a>
+            <a href="#">Pinterest</a>
+            <a href="#">YouTube</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Savoria. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

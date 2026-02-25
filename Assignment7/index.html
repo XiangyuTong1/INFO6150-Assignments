@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Savoria — Culinary Inspiration</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="site-header">
+    <div class="header-inner">
+        <a href="index.html" class="logo">Savoria</a>
+        <nav class="nav">
+            <a href="index.html" class="nav__link nav__link--active">Home</a>
+            <a href="recipes.html" class="nav__link">Recipes</a>
+            <a href="#featured" class="nav__link">Featured</a>
+            <a href="#newsletter" class="nav__link">Newsletter</a>
+        </nav>
+        <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero__content">
+        <span class="hero__tag">New Collection</span>
+        <h1 class="hero__title">Taste the <em>Art</em> of Cooking</h1>
+        <p class="hero__sub">Explore hand-crafted recipes from kitchens around the world. Fresh ingredients, bold flavors, unforgettable moments.</p>
+        <div class="hero__actions">
+            <a href="recipes.html" class="btn btn--primary">Explore Recipes</a>
+            <a href="#featured" class="btn btn--ghost">See Featured</a>
+        </div>
+    </div>
+    <div class="hero__visual">
+        <div class="hero__img-wrap">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80" alt="Delicious food" />
+        </div>
+        <div class="hero__badge">
+            <span class="hero__badge-num">200+</span>
+            <span class="hero__badge-txt">Recipes</span>
+        </div>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="stats__grid">
+        <div class="stats__item">
+            <span class="stats__num">200+</span>
+            <span class="stats__label">Recipes</span>
+        </div>
+        <div class="stats__item">
+            <span class="stats__num">50k</span>
+            <span class="stats__label">Monthly Readers</span>
+        </div>
+        <div class="stats__item">
+            <span class="stats__num">30+</span>
+            <span class="stats__label">Cuisines</span>
+        </div>
+        <div class="stats__item">
+            <span class="stats__num">15</span>
+            <span class="stats__label">Chef Contributors</span>
+        </div>
+    </div>
+</section>
+
+<section class="featured" id="featured">
+    <div class="section-header">
+        <span class="section-tag">Handpicked for You</span>
+        <h2 class="section-title">Featured Recipes</h2>
+        <p class="section-desc">Seasonal favorites curated by our team of culinary experts.</p>
+    </div>
+    <div class="cards-grid">
+        <article class="card card--large">
+            <div class="card__img-wrap">
+                <img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=800&q=80" alt="Pasta Carbonara" />
+                <span class="card__category">Italian</span>
+            </div>
+            <div class="card__body">
+                <div class="card__meta">
+                    <span>⏱ 30 min</span>
+                    <span>🍽 4 servings</span>
+                    <span>⭐ 4.9</span>
+                </div>
+                <h3 class="card__title">Classic Pasta Carbonara</h3>
+                <p class="card__desc">Silky egg-based sauce with crispy pancetta and freshly ground black pepper over al dente spaghetti.</p>
+                <a href="recipes.html" class="card__link">View Recipe →</a>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card__img-wrap">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Salad Bowl" />
+                <span class="card__category">Healthy</span>
+            </div>
+            <div class="card__body">
+                <div class="card__meta">
+                    <span>⏱ 15 min</span>
+                    <span>⭐ 4.7</span>
+                </div>
+                <h3 class="card__title">Rainbow Grain Bowl</h3>
+                <p class="card__desc">Nourishing grains, roasted veggies, and tahini dressing.</p>
+                <a href="recipes.html" class="card__link">View Recipe →</a>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card__img-wrap">
+                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="Pancakes" />
+                <span class="card__category">Breakfast</span>
+            </div>
+            <div class="card__body">
+                <div class="card__meta">
+                    <span>⏱ 20 min</span>
+                    <span>⭐ 4.8</span>
+                </div>
+                <h3 class="card__title">Fluffy Buttermilk Pancakes</h3>
+                <p class="card__desc">Cloud-like stacks with maple syrup and fresh berries.</p>
+                <a href="recipes.html" class="card__link">View Recipe →</a>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card__img-wrap">
+                <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600&q=80" alt="Sushi" />
+                <span class="card__category">Japanese</span>
+            </div>
+            <div class="card__body">
+                <div class="card__meta">
+                    <span>⏱ 60 min</span>
+                    <span>⭐ 4.9</span>
+                </div>
+                <h3 class="card__title">Homemade Sushi Rolls</h3>
+                <p class="card__desc">Fresh salmon and avocado rolled with seasoned sushi rice.</p>
+                <a href="recipes.html" class="card__link">View Recipe →</a>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card__img-wrap">
+                <img src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600&q=80" alt="Tacos" />
+                <span class="card__category">Mexican</span>
+            </div>
+            <div class="card__body">
+                <div class="card__meta">
+                    <span>⏱ 25 min</span>
+                    <span>⭐ 4.6</span>
+                </div>
+                <h3 class="card__title">Street-Style Tacos</h3>
+                <p class="card__desc">Smoky carne asada with fresh salsa verde and cilantro.</p>
+                <a href="recipes.html" class="card__link">View Recipe →</a>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="categories">
+    <div class="section-header">
+        <span class="section-tag">Browse by Type</span>
+        <h2 class="section-title">Explore Categories</h2>
+    </div>
+    <div class="cat-flex">
+        <div class="cat-item cat-item--breakfast">
+            <span class="cat-item__icon">🥞</span>
+            <span class="cat-item__name">Breakfast</span>
+        </div>
+        <div class="cat-item cat-item--lunch">
+            <span class="cat-item__icon">🥗</span>
+            <span class="cat-item__name">Lunch</span>
+        </div>
+        <div class="cat-item cat-item--dinner">
+            <span class="cat-item__icon">🍝</span>
+            <span class="cat-item__name">Dinner</span>
+        </div>
+        <div class="cat-item cat-item--dessert">
+            <span class="cat-item__icon">🍰</span>
+            <span class="cat-item__name">Dessert</span>
+        </div>
+        <div class="cat-item cat-item--drinks">
+            <span class="cat-item__icon">🍹</span>
+            <span class="cat-item__name">Drinks</span>
+        </div>
+        <div class="cat-item cat-item--snacks">
+            <span class="cat-item__icon">🥨</span>
+            <span class="cat-item__name">Snacks</span>
+        </div>
+    </div>
+</section>
+
+<section class="newsletter" id="newsletter">
+    <div class="newsletter__inner">
+        <div class="newsletter__text">
+            <h2>Get Weekly Recipes</h2>
+            <p>Join 50,000+ food lovers and receive fresh recipes every Tuesday.</p>
+        </div>
+        <div class="newsletter__form">
+            <input type="email" placeholder="Enter your email address" class="newsletter__input" />
+            <button class="btn btn--primary">Subscribe</button>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="index.html" class="logo">Savoria</a>
+            <p>Bringing joy through food, one recipe at a time.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Explore</h4>
+            <a href="index.html">Home</a>
+            <a href="recipes.html">Recipes</a>
+            <a href="#">About</a>
+        </div>
+        <div class="footer-links">
+            <h4>Categories</h4>
+            <a href="#">Breakfast</a>
+            <a href="#">Lunch</a>
+            <a href="#">Dinner</a>
+        </div>
+        <div class="footer-links">
+            <h4>Connect</h4>
+            <a href="#">Instagram</a>
+            <a href="#">Pinterest</a>
+            <a href="#">YouTube</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Savoria. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
